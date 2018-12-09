@@ -12,8 +12,10 @@
         <th>Cliente</th>
         <th>Grupo</th>
         <th>Cota</th>
-        <th>Data de pagamento</th>
+        <th>Vencimento</th>
         <th>Parcela</th>
+        <th>Status</th>
+
     </tr>
 
     @foreach (var pagamento in Model)
@@ -22,8 +24,9 @@
         <td>@Html.ActionLink(pagamento.Clientes.Nome, "DetalhaPagamentoByClienteId", new { id = pagamento.PagamentoId })</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Grupos.Nome)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Cota_id)</td>
-        <td>@Html.DisplayFor(modelItem => pagamento.Dt_Pagamento)</td>
+        <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
+        <td>@Html.DisplayFor(modelItem => pagamento.Status_Pagamento)</td>
 
         <td>
 

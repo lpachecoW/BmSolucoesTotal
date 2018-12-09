@@ -19,6 +19,9 @@ namespace MgSolucoes.Models
         [Display(Name = "Data de pagamento")]
         public DateTime Dt_Pagamento { get; set; }
 
+        [Display(Name = "Data de vencimento")]
+        public DateTime Dt_Vencimento { get; set; }
+
         [Display(Name = "Valor Pago")]
         public decimal Valor_Pago { get; set; }
 

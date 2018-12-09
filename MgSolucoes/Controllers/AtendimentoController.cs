@@ -38,7 +38,7 @@ namespace MgSolucoes.Controllers
         public ActionResult AtendimentosRealizados()
         {
             var atendimentos = db.Atendimentos.GroupBy(x => x.Clientes.Nome).Select(y => y.FirstOrDefault()).ToList();
-
+            atendimentos = atendimentos.OrderBy(x => x.Dt_Atendimento).ToList();
             return View(atendimentos);
 
         }

@@ -13,6 +13,7 @@ namespace MgSolucoes.Models
         [Key]
         public int PagamentoId { get; set; }
         public DateTime Dt_Pagamento { get; set; }
+        public DateTime Dt_Vencimento { get; set; }
         public decimal Valor_Pago { get; set; }
         public string Status_Pagamento { get; set; }
         public int Parcela_num { get; set; }

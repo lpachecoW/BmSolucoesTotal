@@ -22,12 +22,12 @@ namespace MgSolucoes.Controllers
         public ActionResult Index(int? page)
         {
             string sortOrder = "";
-            
+
             var pagamentos = db.Pagamentos.GroupBy(x => x.Clientes.Nome).Select(y => y.FirstOrDefault()).AsQueryable();
-            
+
             switch (sortOrder)
             {
-         
+
                 default:
                     pagamentos = pagamentos.OrderBy(s => s.Valor_Pago);
                     break;
@@ -51,12 +51,12 @@ namespace MgSolucoes.Controllers
         {
 
             ContasAPagar contas = new ContasAPagar();
-                
+
             var aReceber = (from cli in db.Clientes
-                           join gru in db.Grupos on cli.Grupo_id equals gru.Grupo_id
-                           join com in db.Comissoes on cli.Grupo_id equals com.Grupo_id
-                           join rep in db.Representacoes on cli.Representacao_id equals rep.Representacao_id
-                           select new ContasAPagarViewModel { Nome = gru.Nome, nome1 = rep.Nome, Nu_parcelas = gru.Nu_parcelas, Valor_Credito = cli.Valor_Credito, ClienteId = cli.ClienteId });
+                            join gru in db.Grupos on cli.Grupo_id equals gru.Grupo_id
+                            join com in db.Comissoes on cli.Grupo_id equals com.Grupo_id
+                            join rep in db.Representacoes on cli.Representacao_id equals rep.Representacao_id
+                            select new ContasAPagarViewModel { Nome = gru.Nome, nome1 = rep.Nome, Nu_parcelas = gru.Nu_parcelas, Valor_Credito = cli.Valor_Credito, ClienteId = cli.ClienteId });
 
 
             return View(aReceber);
@@ -64,7 +64,7 @@ namespace MgSolucoes.Controllers
 
         public ActionResult ContasAReceberPorCliente(int? id)
         {
-            
+
             var detalhePorCliente = db.Pagamentos.Where(x => x.Clienteid == id).ToList();
 
             return View(detalhePorCliente);
@@ -102,7 +102,7 @@ namespace MgSolucoes.Controllers
                                 Rep_5 = (cli.Valor_Credito * com.Rep_5 / 100),
                                 Rep_6 = (cli.Valor_Credito * com.Rep_6 / 100),
                                 ClienteId = cli.ClienteId
-                                
+
                             });
 
             aReceber = aReceber.Where(x => x.ClienteId.Equals(id));
@@ -129,46 +129,93 @@ namespace MgSolucoes.Controllers
 
             //if (ModelState.IsValid)
             //{
-                
-                var pagamento = new Pagamento();
-                if (model.Dt_Pagamento == null) {
-                    pagamento.Dt_Pagamento = DateTime.UtcNow;
-                } else {
+            int parcelas = cliente.Grupos.Nu_parcelas;
+            var pagamento = new Pagamento();
+            var olddate = DateTime.Now;
+
+            DateTime? isVencimento = null;
+            DateTime? isPagamento = null;
+
+            isVencimento = model.Dt_Vencimento;
+            isPagamento = model.Dt_Pagamento;
+
+            for (var i = 0; i < parcelas; i++)
+            {
+                if (model.Dt_Pagamento == null)
+                {
+                    pagamento.Dt_Pagamento = DateTime.Now;
+                }
+                else
+                {
                     pagamento.Dt_Pagamento = model.Dt_Pagamento;
                 }
-                pagamento.Clienteid = cliente.ClienteId;
+
+                if (model.Dt_Vencimento == null && i == 0)
+                {
+                    pagamento.Dt_Vencimento = DateTime.Now;
+                }
                 
+                pagamento.Clienteid = cliente.ClienteId;
+
                 pagamento.Grupo_id = cliente.Grupo_id;
-                pagamento.Status_Pagamento = model.Status_Pagamento;
-                pagamento.Valor_Pago = model.Valor_Pago;
-                pagamento.Parcela_num = model.Parcela_num;
 
-
-                try
+                if (i == 0)
                 {
-                    db.Pagamentos.Add(pagamento);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Pagamento");
+                    pagamento.Status_Pagamento = "PAGO";
+                    pagamento.Dt_Vencimento = model.Dt_Vencimento;
+                    
                 }
-                catch (DbEntityValidationException e)
+                else
                 {
-                    foreach (var eve in e.EntityValidationErrors)
+                    pagamento.Status_Pagamento = "NÃO PAGO";
+                }
+                
+                if (isVencimento.HasValue)
+                {
+                    if (i > 0)
                     {
-                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
+                        var tempDate = model.Dt_Vencimento.AddMonths(i);
+                        var newDate = new DateTime(tempDate.Year, tempDate.Month, tempDate.Day); //create 
+                        pagamento.Dt_Vencimento = newDate;
                     }
-                    throw;
-
+                    else {
+                        pagamento.Dt_Vencimento = model.Dt_Vencimento;
+                    }
                 }
+
+                pagamento.Valor_Pago = model.Valor_Pago;
+                pagamento.Parcela_num = i+1;
+
+                db.Pagamentos.Add(pagamento);
+                db.SaveChanges();
+            }
+
+            
+
+            try
+            {
+                
+                return RedirectToAction("Index", "Pagamento");
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                        ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+
+            }
 
 
             //}
-            
+
         }
     }
 }

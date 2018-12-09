@@ -2,6 +2,8 @@
 $("#Dt_Cadastro").inputmask("mask", { "mask": "99/99/9999" },{ placeholder: "mm/dd/yyyy" });
 //$("#Dt_nascimento").inputmask("mask", { "mask": "99/99/9999" },{ placeholder: "dd/mm/yyyy" });
 
+$("#Dt_Vencimento").inputmask("mask", { "mask": "99/99/9999" }, { placeholder: "mm/dd/yyyy" });
+
 $("#Dt_Nascimento").inputmask("mask", { "mask": "99/99/9999" },{ placeholder: "mm/dd/yyyy" });
 $("#Dt_Cadastro").inputmask("mask", { "mask": "99/99/9999" }, { placeholder: "mm/dd/yyyy" });
 //$("#Dt_cadastro").inputmask("mask", { "mask": "99/99/9999" }, { placeholder: "mm/dd/yyyy" });
