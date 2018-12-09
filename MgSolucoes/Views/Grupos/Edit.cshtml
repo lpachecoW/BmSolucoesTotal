@@ -1,0 +1,62 @@
+﻿@model MgSolucoes.Models.Grupos
+@{
+    ViewBag.Title = "Editar Grupo";
+}
+
+<h2>Editar Grupo</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(m => m.Grupo_id)
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Nome do grupo</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Numero de parcelas</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nu_parcelas, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nu_parcelas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Tipo de adesão</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Tipo_adesao, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tipo_adesao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Data de vencimento </p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Dt_Vencimento, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Dt_Vencimento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+      
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar alterações" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

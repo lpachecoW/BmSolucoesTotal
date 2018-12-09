@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Cliente>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Grupos x Vencimentos";
+}
+
+<h3>Grupos e vencimentos</h3>
+
+@using (Html.BeginForm("ClienteByGrupoVencimento", "Cliente", FormMethod.Get))
+{
+    <p>
+        Grupo: @Html.TextBox("grupoNome", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+    <table class="table">
+        <tr>
+            <th>Cliente</th>
+            <th>Grupo</th>
+            <th>Vencimento</th>
+          
+
+        </tr>
+
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => cliente.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cliente.Grupos.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cliente.Grupos.Dt_Vencimento)
+                </td>
+                
+            </tr>
+        }
+
+    </table>
+
+<br />
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

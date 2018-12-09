@@ -1,0 +1,103 @@
+﻿@model MgSolucoes.Models.ComissaoViewModel
+@{
+    ViewBag.Title = "Adicionar Comissao";
+}
+
+<h4>@ViewBag.Title</h4>
+<hr />
+
+@using (Html.BeginForm("Create", "Comissao", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Grupo_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Grupo_id,
+                               new SelectList(ViewBag.Grupos, "Grupo_id", "Nome"),
+                               "Escolha o  grupo", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Grupo_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Representacao_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Representacao_id,
+                               new SelectList(ViewBag.Representacao, "Representacao_id", "Nome"),
+                               "Escolha a Representacao", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Representacao_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rep_1, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rep_1,
+                               new { @class = "form-control", @placeholder = "Comissao Rep 1" })
+            @Html.ValidationMessageFor(m => m.Rep_1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rep_2, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rep_2,
+                               new { @class = "form-control", @placeholder = "Comissao Rep 2" })
+            @Html.ValidationMessageFor(m => m.Rep_2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rep_3, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rep_3,
+                               new { @class = "form-control", @placeholder = "Comissao Rep 3" })
+            @Html.ValidationMessageFor(m => m.Rep_3, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rep_4, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rep_4,
+                               new { @class = "form-control", @placeholder = "Comissao Rep 4" })
+            @Html.ValidationMessageFor(m => m.Rep_4, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rep_5, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rep_5,
+                               new { @class = "form-control", @placeholder = "Comissao Rep 5" })
+            @Html.ValidationMessageFor(m => m.Rep_5, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rep_6, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rep_6,
+                               new { @class = "form-control", @placeholder = "Comissao Rep 6" })
+            @Html.ValidationMessageFor(m => m.Rep_6, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Adicionar Comissao" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

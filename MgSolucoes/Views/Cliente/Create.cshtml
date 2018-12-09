@@ -1,0 +1,153 @@
+﻿@model MgSolucoes.Models.ClienteViewModel
+@{
+    ViewBag.Title = "Adicionar cliente";
+}
+
+<h4>@ViewBag.Title</h4>
+<hr />
+
+@using (Html.BeginForm("Create", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nome,
+                               new { @class = "form-control", @placeholder = "Nome do cliente" })
+            @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cpf, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Cpf,
+                               new { @class = "form-control", @placeholder = "CPF/CNPJ" })
+            @Html.ValidationMessageFor(m => m.Cpf, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nu_conta_ade, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nu_conta_ade,
+                               new { @class = "form-control", @placeholder = "Conta adesao" })
+            @Html.ValidationMessageFor(m => m.Nu_conta_ade, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email,
+                               new { @class = "form-control", @placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Valor_Credito, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Valor_Credito,new { @class = "form-control", @placeholder = "Valor do credito" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dt_Cadastro, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dt_Cadastro,
+                               new { @class = "form-control", @placeholder = "Data de Cadastro" })
+            @Html.ValidationMessageFor(m => m.Dt_Cadastro, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dt_Nascimento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dt_Nascimento,
+                               new { @class = "form-control", @placeholder = "Data de nascimento" })
+            @Html.ValidationMessageFor(m => m.Dt_Nascimento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tel_Fixo, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Tel_Fixo,
+                               new { @class = "form-control", @placeholder = "Telefone Fixo" })
+            @Html.ValidationMessageFor(m => m.Tel_Fixo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tel_Movel, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Tel_Movel,
+                               new { @class = "form-control", @placeholder = "Telefone celular" })
+            @Html.ValidationMessageFor(m => m.Tel_Movel, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.TipoBemId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.TipoBemId,
+                               new SelectList(ViewBag.TipoBem, "TipoBemId", "Nome"),
+                               "Tipo do bem", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Grupo_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Grupo_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Grupo_id,
+                               new SelectList(ViewBag.Grupos, "Grupo_id", "Nome"),
+                               "Escolha o  grupo", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Grupo_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cota_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Cota_id,
+                               new { @class = "form-control", @placeholder = "Cota Numero" })
+            @Html.ValidationMessageFor(m => m.Cota_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Representacao_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Representacao_id,
+                               new SelectList(ViewBag.Representacao, "Representacao_id", "Nome"),
+                               "Escolha a Representacao", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Representacao_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vendedor, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Vendedor,
+                               new { @class = "form-control", @placeholder = "Nome do Vendedor" })
+            @Html.ValidationMessageFor(m => m.Vendedor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Adicionar Cliente" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}

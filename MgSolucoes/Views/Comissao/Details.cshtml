@@ -1,0 +1,102 @@
+﻿@model MgSolucoes.Models.Comissao
+@{
+    ViewBag.Title = "Detalhes";
+}
+<h2>Detalhes da Comissao</h2>
+<hr />
+<div>
+    <div class="form-horizontal">
+
+        <div class="card-content">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante </label>
+
+                            @Html.TextBoxFor(m => m.Representacoes.Nome,
+                                               new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Grupo</label>
+                            @Html.TextBoxFor(m => m.Grupos.Nome,
+                                  new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante 1</label>
+                            @Html.TextBoxFor(m => m.Rep_1, new { @class = "form-control", @disabled = "disabled" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante 2</label>
+                            @Html.TextBoxFor(m => m.Rep_2, new { @class = "form-control", @disabled = "disabled" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante 3</label>
+                            @Html.TextBoxFor(m => m.Rep_3,
+                         new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante 4</label>
+                            @Html.TextBoxFor(m => m.Rep_4,
+                          new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante 5</label>
+                            @Html.TextBoxFor(m => m.Rep_5,
+                          new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante 6</label>
+                            @Html.TextBoxFor(m => m.Rep_6,
+                        new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+
+             
+
+                @*@Html.ActionLink("Retornar", "Index", null, new { @class = "btn btn-primary pull-left" })*@
+
+                @Html.ActionLink(
+                "Retornar",
+                "Index",
+                null,
+                new { @class= "btn btn-primary pull-right", @style= "" }
+                )
+
+
+
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model MgSolucoes.Models.PagamentoViewModel
+@{
+    ViewBag.Title = "Adicionar pagamento";
+}
+
+<h2>Adicionar Pagamento</h2>
+
+@ViewBag.Grupos
+@ViewBag.Cliente
+
+@using (Html.BeginForm("Create", "Pagamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dt_Pagamento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dt_Pagamento,
+                               new { @class = "form-control", @placeholder = "Data de Pagamento" })
+            @Html.ValidationMessageFor(m => m.Dt_Pagamento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Valor_Pago, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Valor_Pago,
+                               new { @class = "form-control", @placeholder = "Valor Pago" })
+            @Html.ValidationMessageFor(m => m.Valor_Pago, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Parcela_num, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Parcela_num,
+                               new { @class = "form-control", @placeholder = "Status do Pagamento" })
+            @Html.ValidationMessageFor(m => m.Parcela_num, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status_Pagamento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Status_Pagamento,
+                               new { @class = "form-control", @placeholder = "Status do Pagamento" })
+            @Html.ValidationMessageFor(m => m.Status_Pagamento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Adicionar Pagamento" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+
+</div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+

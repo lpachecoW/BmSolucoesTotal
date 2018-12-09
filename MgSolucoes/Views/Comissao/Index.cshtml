@@ -1,0 +1,63 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Comissao>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Comissoes";
+}
+
+
+
+<h2>Cadastro de comissoes</h2>
+
+
+<p>
+    @Html.ActionLink("Adicionar Comissao", "Create")
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>@Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NomeSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+        @*<th>Telefone Fixo</th>*@
+        <th>Grupo</th>
+        <th>Parcelas</th>
+        <th>Representacao</th>
+        
+        <th></th>
+
+
+    </tr>
+
+    @foreach (var comissao in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => comissao.Grupos.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => comissao.Grupos.Nu_parcelas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => comissao.Representacoes.Nome)
+        </td>
+
+        <td>
+            <div class="dropdown">
+                <button class="dropbtn">Funcoes</button>
+                <div class="dropdown-content">
+                    <a href="#">@Html.ActionLink("Editar", "Edit", new { id = comissao.ComissaoId })</a>
+                    <a href="#">@Html.ActionLink("Detalhes", "Details", new { id = comissao.ComissaoId })</a>
+                    <a href="#">@Html.ActionLink("Excluir", "Delete", new { id = comissao.ComissaoId })</a>
+                </div>
+            </div>
+
+        </td>
+
+    </tr>
+    }
+
+</table>
+<br />
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

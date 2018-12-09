@@ -1,0 +1,197 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Cliente>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<style>
+    #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+    }
+
+    /* Rules for sizing the icon. */
+    .material-icons.md-18 {
+        font-size: 18px;
+    }
+
+    .material-icons.md-24 {
+        font-size: 24px;
+    }
+
+    .material-icons.md-36 {
+        font-size: 36px;
+    }
+
+    .material-icons.md-48 {
+        font-size: 48px;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+            .tooltip .tooltiptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    .hasntContato {
+        color: white;
+    }
+
+    .hasContato {
+        color: green;
+    }
+
+    #toogleFiltros {
+        width: 100%;
+        padding: 50px 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+    #filtros {
+     font-size:16px;
+    }
+</style>
+
+
+
+<div>
+    <i class="material-icons md-36">@Html.ActionLink("person_add", "Create")</i>
+    <br />
+</div>
+<br />
+<a href="#" id="filtros" onclick="toggle_visibility('foo');">Filtros</a>
+
+
+<div id="foo" style="display:none;">
+    @using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
+    {
+
+
+        <input type="text" id="myInput" name="clienteNome" placeholder="Busca por nome do cliente">
+        <input type="text" id="myInput" name="grupoNome" placeholder="Digite o grupo">
+        <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
+        <input type="text" id="myInput" name="representacaoNome" placeholder="Digite a representação">
+        <input type="submit" value="Buscar" />
+
+
+    }
+</div>
+<br />
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>@Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NomeSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+        <th>Atendimento</th>
+        <th>Telefone</th>
+        <th>Grupo/Cota</th>
+        <th>Representacoes</th>
+        <th>Pagamento</th>
+
+
+    </tr>
+
+    @foreach (var cliente in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })
+            </td>
+            
+            <td>
+                @if (cliente.HasAtendimento == 1)
+                {
+                    <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasContato" })</i>
+                }
+                else
+                {
+                    <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasntContato" })</i>
+                }
+            </td>
+            <td id="Tel_Fixo">
+                @Html.DisplayFor(modelItem => cliente.Tel_Fixo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => cliente.Representacoes.Nome)
+            </td>
+            <td>
+                <i class="material-icons md-36">@Html.ActionLink("attach_money", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</i>
+            </td>
+            <td></td>
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">Funcoes</button>
+                    <div class="dropdown-content">
+                        <i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = cliente.ClienteId })</i>
+                        <i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = cliente.ClienteId })</i>
+                        <a href="#"></a>
+                    </div>
+                </div>
+
+            </td>
+
+        </tr>
+    }
+
+</table>
+<br />
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+<script>
+
+
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        if (e.style.display == 'block')
+            e.style.display = 'none';
+        else
+            e.style.display = 'block';
+    }
+</script>

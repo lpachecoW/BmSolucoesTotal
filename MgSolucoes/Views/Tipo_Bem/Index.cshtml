@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MgSolucoes.Models.Tipo_Bem>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cadastrar bens</h2>
+
+<p>
+    @Html.ActionLink("Incluir novo Bem", "Create", "Tipo_Bem", new { @class = "btn btn-sucess" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+    </tr>
+
+    @foreach (var bens in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => bens.Nome)</td>
+            
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = bens.TipoBemId }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = bens.TipoBemId }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = bens.TipoBemId })
+            </td>
+        </tr>
+
+    }
+</table>
+

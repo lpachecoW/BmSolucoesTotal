@@ -1,0 +1,75 @@
+﻿@model MgSolucoes.Models.AtendimentoViewModel
+@{
+    ViewBag.Title = "Novo Atendimento";
+}
+
+<h1>Novo Atendimento</h1>
+<hr />
+
+@using (Html.BeginForm("Create", "Atendimento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Texto, new { @class = "control-label col-md-2" })
+        <div class="col-md-10" rows="5">
+            @Html.TextAreaFor(m => m.Texto, new { @class = "" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status_Atendimento_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Status_Atendimento_id,
+                               new SelectList(ViewBag.Atendimento, "Status_Atendimento_id", "Nome"),
+                               "Status deste atendimento", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Status_Atendimento_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status_Pagamento_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Status_Pagamento_id,
+                               new SelectList(ViewBag.Pagamento, "Status_Pagamento_id", "Nome"),
+                               "Boleto Enviado?", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Status_Pagamento_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status_Lance_id, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Status_Lance_id,
+                               new SelectList(ViewBag.Lance, "Status_lance_id", "Nome"),
+                               "Lance ofertado?", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Status_Pagamento_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Valor_ofertado, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Valor_ofertado, new { @class = "form-control", @placeholder = "Valor ofertado" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Adicionar Contato" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Inicio", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $('#Dt_Cadastro').val(Date)
+    $('#Dt_Nascimento').val(Date)
+    
+    </script>
+}

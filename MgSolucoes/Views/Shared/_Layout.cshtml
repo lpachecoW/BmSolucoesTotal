@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Portal BM Soluções</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <!--  Material Dashboard CSS    -->
+    <link href="~/Content/material-dashboard.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+        <a href="@Url.Action("Index", null, new { area = string.Empty, controller = "User" }, Request.Url.Scheme)">
+    -->
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    BM Portal
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="@Url.Action("Index", "Home")">
+                            <i class="material-icons">dashboard</i>
+                            <p>Inicio</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Cliente")">
+                            <i class="material-icons">person</i>
+                            <p>Clientes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("AtendimentosRealizados", "Atendimento")">
+                            <i class="material-icons">content_paste</i>
+                            <p>Atendimentos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Pagamento")">
+                            <i class="material-icons">attach_money</i>
+                            <p>Parcelas pagas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("BmParcelasAReceber", "Pagamento")">
+                            <i class="material-icons">local_atm</i>
+                            <p>BM a receber</p>
+                        </a>
+                    </li>
+
+
+
+                    @*<li>
+            <a href="@Url.Action("ContasAReceber", "Pagamento")">
+                <i class="material-icons">attach_money</i>
+                <p>Comissao x Grupos</p>
+            </a>
+        </li>*@
+
+                    @*<li>
+            <a href="@Url.Action("Index", "Comissao")">
+                <i class="material-icons">attach_money</i>
+                <p>Nova Comissão</p>
+            </a>
+        </li>*@
+
+                    <li>
+                        <a href="@Url.Action("Index", "Representacao")">
+                            <i class="material-icons">library_books</i>
+                            <p>Nova Representacao</p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Grupos")">
+                            <i class="material-icons">library_books</i>
+                            <p>Novo Grupo</p>
+                        </a>
+                    </li>
+
+
+                    @*<li>
+            <a href="#">
+                <i class="material-icons text-gray">notifications</i>
+                <p>Solicitações</p>
+            </a>
+        </li>*@
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="main-panel">
+            <div class="container body-content">
+                @RenderBody()
+
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <footer>
+                    <div class="container-fluid">
+                        <nav class="pull-left">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Company
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Portfolio
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Blog
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <p class="copyright pull-right">
+                            &copy;
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            <a href="#">Assesoftware</a>, desenvolvimento de sistemas web
+                        </p>
+                    </div>
+                </footer>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/inputmask")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/Scripts/Geral.js"></script>
+
+</body>
+</html>

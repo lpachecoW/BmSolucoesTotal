@@ -1,0 +1,31 @@
+﻿@model MgSolucoes.Models.Atendimento
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+<h2>Detalhes do atendimento</h2>
+<div>
+    Cliente:@Html.TextBoxFor(m => m.Clientes.Nome, new { @class = "form-control", @disabled = "disabled" })
+    <br />
+    Data de atendimento:@Html.TextBoxFor(m => m.Dt_Atendimento, new { @class = "form-control", @disabled = "disabled" })
+    <br />
+    <textarea rows="10" cols="150">@Html.Raw(Model.Texto)</textarea>
+    <p>Status Atendimento: @Html.Raw(Model.Atendimentos.Nome)</p>
+    <p>Boleto enviado? @Html.Raw(Model.Pagamentos.Nome)</p>
+    <p>Telefone de contato: @Html.Raw(Model.Clientes.Tel_Fixo)</p>
+    <p>Houve oferta? @Html.Raw(Model.Lances.Nome)</p>
+    <p>Valor Oferta @Html.Raw(Model.Valor_ofertado)</p>
+</div>
+
+@*@Html.ActionLink("Voltar", "Index", new { id = Model.Clienteid })*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            //$("#Dt_Atendimento").inputmask("mask", { "mask": "99/99/9999" });
+        });
+    </script>
+}
+
+

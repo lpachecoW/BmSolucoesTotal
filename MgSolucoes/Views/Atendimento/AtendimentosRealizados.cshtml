@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MgSolucoes.Models.Atendimento>
+@{
+    ViewBag.Title = "AtendimentosRealizados";
+}
+
+<h2>Atendimentos Realizados</h2>
+
+
+<table class="table">
+    <tr>
+        <th>Cliente</th>
+        <th>Data atendimento</th>
+        <th>Grupo</th>
+        <th>Cota</th>
+        <th>Status do atendimento</th>
+    </tr>
+
+    @foreach (var atendimento in Model)
+    {
+    <tr>
+        <td>@Html.ActionLink(atendimento.Clientes.Nome, "ListaAtendimentosByClienteId", new { id = atendimento.Clienteid })</td>
+        <td>@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</td>
+        <td>@Html.DisplayFor(modelItem => atendimento.Clientes.Grupos.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => atendimento.Clientes.Cota_id)</td>
+        <td>@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</td>
+
+    </tr>
+
+    }
+</table>

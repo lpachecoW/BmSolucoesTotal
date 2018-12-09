@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MgSolucoes.Models.Representacao>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Representacoes</h2>
+<p>
+    @Html.ActionLink("Adicionar representante", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>CPF/CNPJ</th>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    @foreach (var representacao in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => representacao.Cpf)</td>
+        <td>@Html.ActionLink(representacao.Nome, "Edit", new { id = representacao.Representacao_id })</td>
+        <td><i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = representacao.Representacao_id })</i></td>
+
+        @*<td>
+            @Html.ActionLink("Editar", "Edit", new { id = representacao.Representacao_id }) |
+            @Html.ActionLink("Detalhes", "Details", new { id = representacao.Representacao_id }) |
+            @Html.ActionLink("Deletar", "Delete", new { id = representacao.Representacao_id })
+        </td>*@
+    </tr>
+
+    }
+</table>
+
+
+
+

@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Pagamento>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Pagamentos";
+}
+
+
+
+<h2>Lista de Pagamentos</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NomeSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+        <th>Data Pagamento</th>
+        <th>Valor Pago</th>
+        <th>Parcela</th>
+        <th></th>
+
+
+    </tr>
+
+    @foreach (var pagamento in Model)
+    {
+    <tr>
+        <td>
+            <a href="#">@Html.ActionLink(pagamento.Clientes.Nome, "ContasAReceberPorCliente", new { id = pagamento.Clienteid })</a>
+        </td>
+
+        <td>
+            @pagamento.Dt_Pagamento
+        </td>
+        <td>
+            @string.Format("{0:#,0.00}", pagamento.Valor_Pago)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => pagamento.Parcela_num)
+        </td>
+        
+    </tr>
+    }
+
+</table>
+<br />
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

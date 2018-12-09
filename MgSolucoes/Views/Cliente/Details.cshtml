@@ -1,0 +1,173 @@
+﻿@model MgSolucoes.Models.Cliente
+@{
+    ViewBag.Title = "Detalhes";
+}
+<h2>Detalhes do cliente</h2>
+<hr />
+<div>
+    <div class="form-horizontal">
+
+        <div class="card-content">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Cliente </label>
+
+                            @Html.TextBoxFor(m => m.Nome,
+                                               new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">CPF</label>
+                            @Html.TextBoxFor(m => m.Cpf,
+                                  new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Grupo</label>
+                            @Html.TextBoxFor(m => m.Grupos.Nome, new { @class = "form-control", @disabled = "disabled" })
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Cota</label>
+                            @Html.TextBoxFor(m => m.Cota_id, new { @class = "form-control", @disabled = "disabled" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Telefone fixo</label>
+                            @Html.TextBoxFor(m => m.Tel_Fixo,
+                         new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Telefone movel</label>
+                            @Html.TextBoxFor(m => m.Tel_Movel,
+                          new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Valor do credito</label>
+                            @Html.TextBoxFor(m => m.Valor_Credito,     new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">E-mail</label>
+                            @Html.TextBoxFor(m => m.Email,
+                        new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Representante</label>
+                            @Html.TextBoxFor(m => m.Representacao_id, ((String)ViewBag.Representacao),
+                           new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Data de nascimento</label>
+                            @Html.TextBoxFor(m => m.Dt_nascimento, new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Numero do contrato</label>
+                            @Html.TextBoxFor(m => m.Nu_conta_ade,
+                           new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Tipo do bem</label>
+                            @Html.TextBoxFor(m => m.Tipo_Bem.Nome,
+                           new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Vendedor</label>
+                            @Html.TextBoxFor(m => m.Vendedor,
+                         new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Data de cadastro</label>
+                            @Html.TextBoxFor(m => m.Dt_Cadastro,
+                           new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+
+                </div>
+
+
+                @*@Html.ActionLink("Retornar", "Index", null, new { @class = "btn btn-primary pull-left" })*@
+
+                @Html.ActionLink(
+                "Retornar",
+                "Index",
+                null,
+                new { @class= "btn btn-primary pull-right", @style= "" }
+                )
+
+
+                @Html.ActionLink(
+                "Novo Atendimento",
+                "Create",
+                "Atendimento",
+                new { id = ViewBag.ClienteId },
+                new { @class= "btn btn-primary pull-left", @style= "" }
+                )
+
+
+
+                @Html.ActionLink(
+                "Historico",
+                "ListaAtendimentosByClienteId",
+                "Atendimento",
+                new { id = ViewBag.ClienteId },
+                new { @class= "btn btn-primary pull-left", @style= "margin-left:5px;" }
+                )
+                @*@Html.ActionLink("Novo atendimento", "Create", "Atendimento", , null, new { @class = "btn btn-primary pull-left" })*@
+
+
+
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>

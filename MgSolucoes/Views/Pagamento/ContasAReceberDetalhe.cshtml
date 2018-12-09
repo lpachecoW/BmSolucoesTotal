@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MgSolucoes.Models.ContasAPagarViewModel>
+@{
+
+    ViewBag.Title = "ContasAReceber";
+    var total = 1;
+}
+
+<h2>A receber</h2>
+<table class="table">
+    <tr>
+        <th>Representante</th>
+        <th>Parcela</th>
+        <th>Carta de credito</th>
+        <th>Representante 1</th>
+        <th>Representante 2</th>
+        <th>Representante 3</th>
+        <th>Representante 4</th>
+        <th>Representante 5</th>
+        <th>Representante 6</th>
+
+
+    </tr>
+    @foreach (var item in Model)
+       
+    {
+        while (total <= item.Nu_parcelas)
+        {
+    <tr>
+        <td>@item.nome1</td>
+        <td>@total</td>
+        <td>@string.Format("{0:#,0.00}", item.Valor_Credito)</td>
+        
+        <td>@string.Format("{0:#,0.00}", item.Rep_1)</td>
+        <td>@string.Format("{0:#,0.00}", item.Rep_2)</td>
+        <td>@string.Format("{0:#,0.00}", item.Rep_3)</td>
+        <td>@string.Format("{0:#,0.00}", item.Rep_4)</td>
+        <td>@string.Format("{0:#,0.00}", item.Rep_5)</td>
+        <td>@string.Format("{0:#,0.00}", item.Rep_6)</td>
+    </tr>
+            total++;
+        }
+
+
+    }
+
+</table>

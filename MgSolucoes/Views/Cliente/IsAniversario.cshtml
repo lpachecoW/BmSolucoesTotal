@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MgSolucoes.Models.Cliente>
+@{
+    ViewBag.Title = "Index";
+    int years = DateTime.Now.Year;
+    int month = DateTime.Now.Month;
+    int day = DateTime.Now.Day;
+    
+}
+
+<h2>Aniversariantes do dia</h2>
+
+
+<table class="table">
+    <tr>
+        <td>Cliente</td>
+        <td>Idade</td>
+    </tr>
+
+
+
+    @foreach (var aniversariante in Model)
+    {
+    <tr>
+           <td>@aniversariante.Nome</td>
+           <td>@(years - @aniversariante.Dt_nascimento.Year) Anos</td>
+    </tr>
+
+    }
+</table>

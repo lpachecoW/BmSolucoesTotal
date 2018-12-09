@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MgSolucoes.Models.Contrato>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Contratos</h2>
+
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Numero)</th>
+        <th>@Html.DisplayNameFor(model => model.Clientes.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Clientes.Cpf)</th>
+        <th>@Html.DisplayNameFor(model => model.Representacoes.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Vencimento)</th>
+        
+    </tr>
+
+    @foreach (var contrato in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => contrato.Numero)</td>
+        <td>@Html.DisplayFor(modelItem => contrato.Clientes.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => contrato.Clientes.Cpf)</td>
+        <td>@Html.DisplayFor(modelItem => contrato.Representacoes.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => contrato.Vencimento)</td>
+
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = contrato.Contrato_id }) |
+            @Html.ActionLink("Detalhes", "Details", new { id = contrato.Contrato_id }) |
+            @Html.ActionLink("Deletar", "Delete", new { id = contrato.Contrato_id })
+        </td>
+    </tr>
+
+    }
+</table>
+
+
+
+

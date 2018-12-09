@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MgSolucoes.Models.ContasAPagarViewModel>
+@{
+    ViewBag.Title = "ContasAReceber";
+}
+
+<h2>A receber</h2>
+
+<table class="table">
+    <tr>
+        <th>Grupo</th>
+        <th>Representante</th>
+        <th>Numero de parcelas</th>
+        <th>Valor do credito</th>
+        <th></th>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+                <td>@Html.ActionLink("Detalhes", "ContasAReceberDetalhe", "Pagamento", new { id = item.ClienteId }, null)</td>
+                <td>@item.nome1</td>
+                <td>@item.Nu_parcelas</td>
+                <td>@item.Valor_Credito</td>
+       </tr>
+                }
+
+    </table>

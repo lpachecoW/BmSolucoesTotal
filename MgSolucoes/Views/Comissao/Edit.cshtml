@@ -1,0 +1,103 @@
+﻿@model MgSolucoes.Models.Comissao
+@{
+    ViewBag.Title = "Edita Comissao";
+}
+
+<h2>Editar Comissao</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(m => m.ComissaoId)
+
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Representacao 1</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Rep_1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rep_1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Representacao 2</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Rep_2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rep_2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Representacao 3</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Rep_3, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rep_3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Representacao 4</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Rep_4, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rep_4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Representacao 5</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Rep_5, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rep_5, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2">Representacao 6</p>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Rep_6, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rep_6, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+     
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Grupo_id, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Grupo_id,
+                                   new SelectList(ViewBag.Grupos, "Grupo_id", "Nome"),
+                                   "Escolha o  grupo", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Grupo_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Representacao_id, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Representacao_id,
+                                   new SelectList(ViewBag.Representacao, "Representacao_id", "Nome"),
+                                   "Escolha a Representacao", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Representacao_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar alterações" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

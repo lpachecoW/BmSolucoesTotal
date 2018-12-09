@@ -1,0 +1,37 @@
+﻿@model MgSolucoes.Models.Pagamento
+@{
+
+    ViewBag.Title = "ContasAReceber";
+
+}
+
+<h3>A receber</h3>
+<table class="table">
+    <tr>
+        <th>Cliente</th>
+        <th>Data do pagamento</th>
+        <th>Grupo</th>
+        <th>Vencimento</th>
+        <th>Parcela</th>
+        <th>Valor Pago</th>
+
+
+
+    </tr>
+
+    <tr>
+        <td>@Html.Raw(Model.Clientes.Nome)</td>
+        <td>@Html.Raw(Model.Dt_Pagamento)</td>
+        <td>@Html.Raw(Model.Grupos.Nome)</td>
+        <td>@Html.Raw(Model.Grupos.Dt_Vencimento)</td>
+        <td>@Html.Raw(Model.Parcela_num)</td>
+        <td>@Html.Raw(Model.Valor_Pago)</td>
+
+    </tr>
+
+
+
+
+
+
+</table>

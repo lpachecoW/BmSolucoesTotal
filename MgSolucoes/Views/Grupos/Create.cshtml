@@ -1,0 +1,58 @@
+﻿@model MgSolucoes.Models.GruposViewModel
+@{
+    ViewBag.Title = "Adicionar Grupo";
+}
+
+<h2>Novo grupo</h2>
+<hr />
+
+@using (Html.BeginForm("Create", "Grupos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nome,
+                            new { @class = "form-control", @placeholder = "Nome" })
+            @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nu_parcelas, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nu_parcelas,
+                            new { @class = "form-control", @placeholder = "Numero de parcelas" })
+            @Html.ValidationMessageFor(m => m.Nu_parcelas, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tipo_adesao, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Tipo_adesao,
+                            new { @class = "form-control", @placeholder = "Tipo de adesao" })
+            @Html.ValidationMessageFor(m => m.Tipo_adesao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dt_Vencimento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dt_Vencimento,
+                            new { @class = "form-control", @placeholder = "Data de vencimento" })
+            @Html.ValidationMessageFor(m => m.Dt_Vencimento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Adicionar Grupo" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+
+</div>
+}

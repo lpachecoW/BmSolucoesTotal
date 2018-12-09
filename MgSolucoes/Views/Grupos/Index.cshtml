@@ -1,0 +1,55 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Grupos>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Grupos</h2>
+
+<p>
+    @Html.ActionLink("Incluir novo Grupo", "Create", "Grupos", new { @class = "btn btn-sucess" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Data de cadastro</th>
+        <th>Data de Vencimento</th>
+        <th>Numero de parcelas</th>
+        <th>Tipo de adesão</th>
+    </tr>
+
+    @foreach (var grupos in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => grupos.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => grupos.Dt_Cadastro)</td>
+        <td>@Html.DisplayFor(modelItem => grupos.Dt_Vencimento)</td>
+        <td>@Html.DisplayFor(modelItem => grupos.Nu_parcelas)</td>
+        <td>@Html.DisplayFor(modelItem => grupos.Tipo_adesao)</td>
+
+     
+        <td>
+            <div class="dropdown">
+                <button class="dropbtn">Ver+</button>
+                <div class="dropdown-content">
+                    @Html.ActionLink("Editar", "Edit", new { id = grupos.Grupo_id })
+                    @Html.ActionLink("Detalhes", "Details", new { id = grupos.Grupo_id })
+                    @Html.ActionLink("Deletar", "Delete", new { id = grupos.Grupo_id })
+                </div>
+            </div>
+
+        </td>
+
+    </tr>
+
+    }
+</table>
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+
+

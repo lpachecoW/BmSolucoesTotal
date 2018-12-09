@@ -1,0 +1,97 @@
+﻿@model MgSolucoes.Models.ContratoViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h1>Novo Contrato</h1>
+<hr />
+
+@using (Html.BeginForm("Create", "Contrato", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(m => m.Numero, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Numero,
+                               new { @class = "form-control", @placeholder = "Numero do contrato" })
+            @Html.ValidationMessageFor(m => m.Numero, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tabela, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Tabela,
+                               new { @class = "form-control", @placeholder = "Tabela" })
+            @Html.ValidationMessageFor(m => m.Tabela, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dt_pagamento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dt_pagamento,
+                               new { @class = "form-control", @placeholder = "Data de pagamento" })
+            @Html.ValidationMessageFor(m => m.Dt_pagamento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Vencimento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Vencimento,
+                               new { @class = "form-control", @placeholder = "Vencimento" })
+            @Html.ValidationMessageFor(m => m.Vencimento, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.N_Parcelas, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.N_Parcelas,
+                               new { @class = "form-control", @placeholder = "Numero de parcelas" })
+            @Html.ValidationMessageFor(m => m.N_Parcelas, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Percentual_bem, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Percentual_bem,
+                               new { @class = "form-control", @placeholder = "Percentual do bem" })
+            @Html.ValidationMessageFor(m => m.Percentual_bem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Valor_bem, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Valor_bem,
+                               new { @class = "form-control", @placeholder = "Valor do bem" })
+            @Html.ValidationMessageFor(m => m.Valor_bem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.TipoBemId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.TipoBemId,
+                               new SelectList(ViewBag.Tipo_Bem, "TipoBemId", "Nome"),
+                               "Escolha a Representacao", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.TipoBemId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Finalizar contrato" class="btn btn-success" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

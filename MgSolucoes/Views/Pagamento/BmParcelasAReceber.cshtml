@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MgSolucoes.Models.Pagamento>
+@{
+    /**/
+
+    ViewBag.Title = "Pagamento cliente";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>Cliente</th>
+        <th>Data de pagamento</th>
+        <th>Parcela</th>
+        <th>Valor Pago</th>
+        <th>Comissão BM</th>
+    </tr>
+
+    @foreach (var pagamento in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => pagamento.Dt_Pagamento)</td>
+        <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
+        <td>@Html.DisplayFor(modelItem => pagamento.Valor_Pago)</td>
+        <td>@Html.Raw((pagamento.Valor_Pago * 0.1m)/100)</td>
+
+        <td>
+
+    </tr>
+
+    }
+</table>
