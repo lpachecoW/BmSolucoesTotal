@@ -42,13 +42,28 @@ $('#Vl_credito_recebe').priceFormat({
     clearOnEmpty: true
 });
 
-//$('#Valor_Pago').priceFormat({
-//    prefix: '',
-//    centsSeparator: ',',
-//    thousandsSeparator: '.',
-//    centsLimit: 2,
-//    clearOnEmpty: true
-//});
+$('#money').priceFormat({
+    prefix: '',
+    centsSeparator: ',',
+    thousandsSeparator: '.',
+    centsLimit: 2,
+    clearOnEmpty: true
+});
+
+$.each($('.money'), function () {
+    var result = $(this).val();
+    console.log(result);
+
+});
+
+$('.money').priceFormat({
+    prefix: 'R$',
+    centsSeparator: ',',
+    thousandsSeparator: '.',
+    centsLimit: 2,
+    clearOnEmpty: true
+});
+
 
 $('#Rep_1').priceFormat({
     prefix: '',
@@ -121,3 +136,5 @@ $('#Tel_Movel').focusout(function () {
         element.mask("(99) 9999-9999?9");
     }
 }).trigger('focusout');
+
+

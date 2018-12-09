@@ -217,5 +217,46 @@ namespace MgSolucoes.Controllers
             //}
 
         }
+
+
+        //[HttpPost]
+        //public ActionResult BaixaPagamento(int idPagamento)
+        //{
+
+        //    var pagamento = db.Pagamentos.Find(idPagamento);
+        //    if (pagamento == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+
+        //    pagamento.Dt_Pagamento = DateTime.Today;
+        //    pagamento.Status_Pagamento = "PAGO";
+
+        //    db.SaveChanges();
+        //    return RedirectToAction("ContasAReceberPorCliente", pagamento.Clienteid );
+
+        //    //ViewBag.Categorias = db.Categorias;
+
+        //}
+
+        public JsonResult BaixaPagamento(int idPagamento)
+        {
+            var pagamento = db.Pagamentos.Find(idPagamento);
+            pagamento.Dt_Pagamento = DateTime.Today;
+            pagamento.Status_Pagamento = "PAGO";
+
+            db.SaveChanges();
+
+            var resultado = new
+            {
+                Sucess = true
+            };
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+            
+        }
+
+
+        
+
     }
 }

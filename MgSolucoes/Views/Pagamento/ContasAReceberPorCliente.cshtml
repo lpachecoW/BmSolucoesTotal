@@ -7,9 +7,12 @@
 
 
 
+
+
 <table class="table">
     <tr>
         <th>Cliente</th>
+        <th></th>
         <th>Grupo</th>
         <th>Cota</th>
         <th>Vencimento</th>
@@ -22,6 +25,37 @@
     {
     <tr>
         <td>@Html.ActionLink(pagamento.Clientes.Nome, "DetalhaPagamentoByClienteId", new { id = pagamento.PagamentoId })</td>
+        @if (pagamento.Status_Pagamento.Equals("PAGO"))
+        {
+
+            <td>
+                <i class="material-icons md-36" id="stsPago">
+                    
+                        <i class="material-icons">
+                            done_outline
+                        </i>
+                        <input hidden="hidden" id="idPayment" value="@pagamento.PagamentoId" />
+                    
+                </i>
+            </td>
+
+
+        }
+        else
+        {
+            <td>
+                <i class="material-icons md-36" id="notPayed" onclick="atualizaPagamento(@pagamento.PagamentoId)">
+                    <a href="#">
+                        <i class="material-icons">
+                            cached
+                        </i>
+                        
+                    </a>
+                </i>
+            </td>
+
+        }
+
         <td>@Html.DisplayFor(modelItem => pagamento.Grupos.Nome)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Cota_id)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
@@ -34,3 +68,26 @@
 
     }
 </table>
+<script>
+
+    function atualizaPagamento(idPayment) {
+        
+        $(function () {
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "/Pagamento/BaixaPagamento",
+                data: { idPagamento: idPayment },
+                success: function (dados) {
+                    if (dados.Sucess) {
+                         location.reload();
+                    }
+                }
+            });
+        });
+
+    }
+
+   
+</script>
+
