@@ -127,7 +127,8 @@
         <th>Telefone</th>
         <th>Grupo/Cota</th>
         <th>Representacoes</th>
-        <th>Pagamento</th>
+        <th>Add Parcelas</th>
+        <th>Baixa Parcela</th>
 
 
     </tr>
@@ -135,47 +136,50 @@
     @foreach (var cliente in Model)
     {
 
-        <tr>
-            <td>
-                @Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })
-            </td>
-            
-            <td>
-                @if (cliente.HasAtendimento == 1)
-                {
-                    <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasContato" })</i>
-                }
-                else
-                {
-                    <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasntContato" })</i>
-                }
-            </td>
-            <td id="Tel_Fixo">
-                @Html.DisplayFor(modelItem => cliente.Tel_Fixo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => cliente.Representacoes.Nome)
-            </td>
-            <td>
-                <i class="material-icons md-36">@Html.ActionLink("attach_money", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</i>
-            </td>
-            <td></td>
-            <td>
-                <div class="dropdown">
-                    <button class="dropbtn">Funcoes</button>
-                    <div class="dropdown-content">
-                        <i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = cliente.ClienteId })</i>
-                        <i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = cliente.ClienteId })</i>
-                        <a href="#"></a>
-                    </div>
+    <tr>
+        <td>
+            @Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })
+        </td>
+
+        <td>
+            @if (cliente.HasAtendimento == 1)
+            {
+                <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasContato" })</i>
+            }
+            else
+            {
+                <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasntContato" })</i>
+            }
+        </td>
+        <td id="Tel_Fixo">
+            @Html.DisplayFor(modelItem => cliente.Tel_Fixo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => cliente.Representacoes.Nome)
+        </td>
+        <td>
+            <i class="material-icons md-36">@Html.ActionLink("attach_money", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</i>
+        </td>
+        <td>
+            <i class="material-icons md-36">@Html.ActionLink("chrome_reader_mode", "ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId }, null)</i>
+        </td>
+        <td></td>
+        <td>
+            <div class="dropdown">
+                <button class="dropbtn">Funcoes</button>
+                <div class="dropdown-content">
+                    <i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = cliente.ClienteId })</i>
+                    <i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = cliente.ClienteId })</i>
+                    <a href="#"></a>
                 </div>
+            </div>
 
-            </td>
+        </td>
 
-        </tr>
+    </tr>
     }
 
 </table>

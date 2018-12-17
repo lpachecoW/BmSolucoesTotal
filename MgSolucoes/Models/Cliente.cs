@@ -35,6 +35,7 @@ namespace MgSolucoes.Models
         public virtual Tipo_Bem Tipo_Bem { get; set; }
         public int Grupo_id { get; set; }
         public virtual Grupos Grupos { get; set; }
+
         
 
     }

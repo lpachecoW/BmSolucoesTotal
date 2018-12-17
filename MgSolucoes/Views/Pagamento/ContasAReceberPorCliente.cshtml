@@ -18,6 +18,8 @@
         <th>Vencimento</th>
         <th>Parcela</th>
         <th>Status</th>
+        <th></th>
+
 
     </tr>
 
@@ -30,12 +32,12 @@
 
             <td>
                 <i class="material-icons md-36" id="stsPago">
-                    
-                        <i class="material-icons">
-                            done_outline
-                        </i>
-                        <input hidden="hidden" id="idPayment" value="@pagamento.PagamentoId" />
-                    
+
+                    <i class="material-icons">
+                        done_outline
+                    </i>
+                    <input hidden="hidden" id="idPayment" value="@pagamento.PagamentoId" />
+
                 </i>
             </td>
 
@@ -49,7 +51,7 @@
                         <i class="material-icons">
                             cached
                         </i>
-                        
+
                     </a>
                 </i>
             </td>
@@ -61,6 +63,7 @@
         <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Status_Pagamento)</td>
+        <td><i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = pagamento.PagamentoId })</i></td>
 
         <td>
 

@@ -131,6 +131,8 @@ namespace MgSolucoes.Controllers
                     break;
             }
             
+
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             
@@ -153,6 +155,7 @@ namespace MgSolucoes.Controllers
         {
             
                 var cliente = new Cliente();
+                
 
                 if (model.Nome == null) {cliente.Nome = "Nome não cadastrado";}else{cliente.Nome = model.Nome;}
                 if(model.Cpf == null){cliente.Cpf = "000.000.000-00";}else{cliente.Cpf = model.Cpf;}
@@ -176,12 +179,10 @@ namespace MgSolucoes.Controllers
                 
                 
                 try
-                {
-                    // Your code...
-                    // Could also be before try if you know the exception occurs in SaveChanges
+                {   
                     db.Clientes.Add(cliente);
                     db.SaveChanges();
-                    //return RedirectToAction("Create", "Contrato", new { id=cliente.ClienteId});
+                    AddPagamentosPorContrato(cliente.Nome, cliente.Nu_conta_ade);
                     return RedirectToAction("Index");
                 }
                 catch (DbEntityValidationException e)
@@ -197,13 +198,8 @@ namespace MgSolucoes.Controllers
                         }
                     }
                     throw;
-                // Se ocorrer um erro retorna para pagina
-                //ViewBag.Clientes = db.Clientes;
-                //return View(model);
             }
-                
-            
-            
+             
         }
 
         void AddContasAReceber(Cliente cli, Grupos gru, Comissao com)
@@ -266,9 +262,6 @@ namespace MgSolucoes.Controllers
             }
 
             Cliente cliente = db.Clientes.Find(id);
-            //ViewBag.Grupos = db.Grupos.Where(x=>x.Grupo_id == cliente.Grupo_id);
-            //ViewBag.Representacao = db.Representacoes.Where(x=>x.Representacao_id == cliente.Representacao_id);
-            //ViewBag.TipoBem = db.Tipo_Bens.Where(x=>x.TipoBemId == cliente.TipoBemId);
             ViewBag.Grupos = db.Grupos;
             ViewBag.Representacao = db.Representacoes;
             ViewBag.TipoBem = db.Tipo_Bens;
@@ -360,6 +353,54 @@ namespace MgSolucoes.Controllers
         }
 
 
+        Boolean AddPagamentosPorContrato(string cliente, int contrato) {
+            bool enviaBanco = false;
+            var clienteBancoId = 0;
+            decimal valorContrato = 0;
+            int numParcelas = 0;
+            int grupoClienteId = 0;
+
+            var clienteTemDados = from s in db.Clientes select s;
+            clienteTemDados = clienteTemDados.Where(x => x.Nu_conta_ade == contrato && x.Nome == cliente);
+            clienteBancoId = clienteTemDados.Select(x => x.ClienteId).FirstOrDefault();
+            valorContrato = clienteTemDados.Select(x => x.Valor_Credito).FirstOrDefault();
+            numParcelas = clienteTemDados.Select(x => x.Grupos.Nu_parcelas).FirstOrDefault();
+            grupoClienteId = clienteTemDados.Select(x => x.Grupos.Grupo_id).FirstOrDefault();
+
+            
+
+            
+
+            for (var i = 0; i < numParcelas-1; i++)
+            {
+                Pagamento clienteAInserir = new Pagamento();
+                clienteAInserir.Clienteid = clienteBancoId;
+                clienteAInserir.Grupo_id = grupoClienteId;
+                if (i == 0) {
+                    clienteAInserir.Dt_Pagamento = DateTime.Today;
+                    clienteAInserir.Dt_Vencimento = DateTime.Today;
+                    clienteAInserir.Status_Pagamento = "PAGO";
+                }
+                else
+                {
+                    var tempVenc = DateTime.Today.AddMonths(i);
+                    var newVenc = new DateTime(tempVenc.Year, tempVenc.Month, tempVenc.Day); //create 
+                    clienteAInserir.Dt_Vencimento = newVenc;
+                    var tempPag = DateTime.Today.AddMonths(i);
+                    var newPag = new DateTime(tempPag.Year, tempPag.Month, tempPag.Day); //create 
+                    clienteAInserir.Dt_Pagamento = newPag;
+                    clienteAInserir.Status_Pagamento = "NÃO PAGO";
+                }
+                clienteAInserir.Valor_Pago = valorContrato * 0.1m / 100;
+                
+                clienteAInserir.Parcela_num = i+1;
+                db.Pagamentos.Add(clienteAInserir);
+                db.SaveChanges();
+            }
+                
+
+            return enviaBanco;
+        }
 
 
     }

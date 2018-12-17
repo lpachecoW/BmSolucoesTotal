@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
@@ -40,7 +41,7 @@ namespace MgSolucoes.Controllers
 
         public ActionResult BmParcelasAReceber()
         {
-            var bmAReceber = db.Pagamentos.Where(x => x.Clienteid > 0).ToList();
+            var bmAReceber = db.Pagamentos.Where(x => x.Clienteid > 0 && x.Status_Pagamento == "PAGO").ToList();
 
             return View(bmAReceber);
         }
@@ -256,7 +257,49 @@ namespace MgSolucoes.Controllers
         }
 
 
-        
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Pagamento pagamento = db.Pagamentos.Find(id);
+            
+            if (pagamento == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(pagamento);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "PagamentoId, Dt_Pagamento, Dt_Vencimento,Valor_Pago,Status_Pagamento, Parcela_num")] Pagamento model)
+        {
+
+            var pagamento = db.Pagamentos.Find(model.PagamentoId);
+            if (pagamento == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else {
+                pagamento.Dt_Pagamento = model.Dt_Pagamento;
+                pagamento.Dt_Vencimento = model.Dt_Vencimento;
+                pagamento.Valor_Pago = model.Valor_Pago;
+                pagamento.Status_Pagamento = model.Status_Pagamento;
+                pagamento.Parcela_num = model.Parcela_num;
+                db.SaveChanges();
+            }
+            
+
+            
+            return RedirectToAction("Index");
+
+            //ViewBag.Categorias = db.Categorias;
+
+        }
 
     }
 }

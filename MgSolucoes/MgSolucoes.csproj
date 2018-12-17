@@ -434,6 +434,7 @@
     <Content Include="Views\Pagamento\DetalhaPagamentoByClienteId.cshtml" />
     <Content Include="Views\Pagamento\BmParcelasAReceber.cshtml" />
     <Content Include="Views\Representacao\Edit.cshtml" />
+    <Content Include="Views\Pagamento\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
