@@ -12,7 +12,7 @@
         <th>Cliente</th>
         <th>Data de pagamento</th>
         <th>Parcela</th>
-        <th>Valor Pago</th>
+        <th></th>
         <th>Comissão BM</th>
         
     </tr>
@@ -23,8 +23,8 @@
         <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Nome)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Dt_Pagamento)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
-        <td><input type="text" class="money" id="money" value="@pagamento.Valor_Pago" readonly /></td>
-        <td><input type="text" class="money" id="money" value="@((pagamento.Valor_Pago * 0.1m)/100)" readonly /></td>
+        <td></td>
+        <td><input type="text" class="money" id="money" value="@(pagamento.Valor_Pago)" readonly /></td>
         
     <td>
 

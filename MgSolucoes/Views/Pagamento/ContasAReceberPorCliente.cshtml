@@ -16,6 +16,7 @@
         <th>Grupo</th>
         <th>Cota</th>
         <th>Vencimento</th>
+        <th>Valor do credito</th>
         <th>Parcela</th>
         <th>Status</th>
         <th></th>
@@ -61,6 +62,7 @@
         <td>@Html.DisplayFor(modelItem => pagamento.Grupos.Nome)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Cota_id)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
+        <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Valor_Credito)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Status_Pagamento)</td>
         <td><i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = pagamento.PagamentoId })</i></td>

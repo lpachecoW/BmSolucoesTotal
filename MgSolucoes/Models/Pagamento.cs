@@ -14,6 +14,8 @@ namespace MgSolucoes.Models
         public int PagamentoId { get; set; }
         public DateTime Dt_Pagamento { get; set; }
         public DateTime Dt_Vencimento { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal Valor_Pago { get; set; }
         public string Status_Pagamento { get; set; }
         public int Parcela_num { get; set; }
