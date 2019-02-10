@@ -20,7 +20,7 @@ namespace MgSolucoes.Controllers
         }
 
         // GET: Cliente
-        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, int? page)
+        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NomeSortParm = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
@@ -113,7 +113,19 @@ namespace MgSolucoes.Controllers
                 {
                     clientes = clientes.Where(s => s.Representacoes.Nome.Contains(representacaoNome));
                 }
+                
+            }
 
+            if (!String.IsNullOrEmpty(comAtendimento))
+            {
+                if (comAtendimento.Equals("S"))
+                {
+                    clientes = clientes.Where(s => s.HasAtendimento == 1);
+                }
+                if (comAtendimento.Equals("N"))
+                {
+                    clientes = clientes.Where(s => s.HasAtendimento == 0);
+                }
             }
 
             //clientes = clientes.Where(x => x.HasAtendimento == 0);

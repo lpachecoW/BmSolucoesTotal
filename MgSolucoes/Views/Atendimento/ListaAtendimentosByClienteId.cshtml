@@ -66,6 +66,7 @@
 <table class="table">
     <tr>
         <th>Cliente</th>
+        <th>Data do relato</th>
         <th>Grupo</th>
         <th>Cota</th>
         <th>Status do atendimento</th>
@@ -76,15 +77,16 @@
     {
     <tr>
         <td>@Html.ActionLink(atendimento.Clientes.Nome, "DetailsByIdDetail", new { id = atendimento.Atendimento_id })</td>
+        <td>@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</td>
         <td>@Html.DisplayFor(modelItem => atendimento.Clientes.Grupos.Nome)</td>
         <td>@Html.DisplayFor(modelItem => atendimento.Clientes.Cota_id)</td>
         <td>@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</td>
         <td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>
 
         <td>
-        
+
         <td><i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = atendimento.Atendimento_id })</i></td>
-       
+
     </tr>
 
     }

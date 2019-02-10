@@ -111,6 +111,7 @@
         <input type="text" id="myInput" name="grupoNome" placeholder="Digite o grupo">
         <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
         <input type="text" id="myInput" name="representacaoNome" placeholder="Digite a representação">
+        <input type="text" id="myInput" name="comAtendimento" placeholder="Possui atendimento? S/N">
         <input type="submit" value="Buscar" />
 
 
@@ -128,7 +129,7 @@
         <th>Grupo/Cota</th>
         <th>Representacoes</th>
         <th>Add Parcelas</th>
-        <th>Baixa Parcela</th>
+        @*<th>Baixa Parcela</th>*@
 
 
     </tr>
@@ -163,9 +164,9 @@
         <td>
             <i class="material-icons md-36">@Html.ActionLink("attach_money", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</i>
         </td>
-        <td>
+        @*<td>
             <i class="material-icons md-36">@Html.ActionLink("chrome_reader_mode", "ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId }, null)</i>
-        </td>
+        </td>*@
         <td></td>
         <td>
             <div class="dropdown">
