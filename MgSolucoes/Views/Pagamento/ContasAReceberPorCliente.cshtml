@@ -64,8 +64,9 @@
         <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Valor_Credito)</td>
         <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
-        <td>@Html.DisplayFor(modelItem => pagamento.Status_Pagamento)</td>
-        <td><i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = pagamento.PagamentoId })</i></td>
+        <td>@string.Format("{0:C}", pagamento.Valor_Pago)</td>
+        @*<td>@Html.DisplayFor(modelItem => pagamento.Valor_Pago)</td>*@
+        <td>@Html.ActionLink("Editar", "Edit", new { id = pagamento.PagamentoId })</td>
 
         <td>
 

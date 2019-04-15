@@ -164,5 +164,14 @@ namespace MgSolucoes.Controllers
             db.SaveChanges();
             return RedirectToAction("AtendimentosRealizados");
         }
+
+        public JsonResult GetComentario(int atendimentoId)
+        {
+            Atendimento atendimento = db.Atendimentos.Find(atendimentoId);
+            
+            var resultado = atendimento.Texto.ToString();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

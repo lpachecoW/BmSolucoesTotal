@@ -67,7 +67,8 @@ namespace MgSolucoes.Controllers
         {
 
             var detalhePorCliente = db.Pagamentos.Where(x => x.Clienteid == id).ToList();
-
+            var totalPagamentos = db.Pagamentos.Where(x => x.Clienteid == id && x.Status_Pagamento.Equals("PAGO")).ToList();
+          
             return View(detalhePorCliente);
         }
 

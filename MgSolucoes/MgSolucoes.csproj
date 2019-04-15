@@ -225,6 +225,7 @@
     <Compile Include="Models\ClienteSearchFilter.cs" />
     <Compile Include="Models\ClienteSearchLogic.cs" />
     <Compile Include="Models\ClienteViewModel .cs" />
+    <Compile Include="Models\Cliente_Atendimento.cs" />
     <Compile Include="Models\Comissao.cs" />
     <Compile Include="Models\ComissaoViewModel.cs" />
     <Compile Include="Models\ConexaoDbContext.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Models\Status_Atendimento.cs" />
     <Compile Include="Models\Status_AtendimentoViewModel.cs" />
     <Compile Include="Models\Status_Lance.cs" />
+    <Compile Include="Models\Status_Lance_Ofertado.cs" />
     <Compile Include="Models\Status_Pagamento.cs" />
     <Compile Include="Models\Tipo_Bem.cs" />
     <Compile Include="Models\Tipo_BemViewModel.cs" />

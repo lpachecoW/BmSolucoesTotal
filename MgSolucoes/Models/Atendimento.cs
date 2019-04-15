@@ -38,8 +38,9 @@ namespace MgSolucoes.Models
 
         public int Clienteid { get; set; }
         public virtual Cliente Clientes { get; set; }
+        public int Cliente_Atendimento_Id { get; set; }
+        public virtual Cliente_Atendimento Cliente_Atendimento { get; set; }
 
-        
-        
+
     }
 }

@@ -403,7 +403,7 @@ namespace MgSolucoes.Controllers
                     clienteAInserir.Dt_Pagamento = newPag;
                     clienteAInserir.Status_Pagamento = "NÃO PAGO";
                 }
-                clienteAInserir.Valor_Pago = valorContrato * 0.1m / 100;
+                clienteAInserir.Valor_Pago = valorContrato/100;
                 
                 clienteAInserir.Parcela_num = i+1;
                 db.Pagamentos.Add(clienteAInserir);

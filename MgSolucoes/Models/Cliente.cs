@@ -13,7 +13,7 @@ namespace MgSolucoes.Models
         [Key]
         public int ClienteId { get; set; }
 
-        
+
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public int Nu_conta_ade { get; set; }
@@ -36,8 +36,10 @@ namespace MgSolucoes.Models
         public virtual Tipo_Bem Tipo_Bem { get; set; }
         public int Grupo_id { get; set; }
         public virtual Grupos Grupos { get; set; }
+        public int Cliente_Atendimento_Id{ get; set; }
+        public virtual Cliente_Atendimento Cliente_Atendimento { get; set; }
 
-        
+
 
     }
 }

@@ -59,35 +59,103 @@
             opacity: 1;
         }
 
+    tr:hover {
+        background:#0094ff;
+    }
+
+    #tst {
+        background: purple;
+        position: relative;
+    }
+
+        #tst h1 {
+            text-align: center;
+        }
+
+        .btn-tst {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
     
 </style>
 <br />
 
+<div>
+    <div class="btn-group" role="group" aria-label="...">
+        <a class="btn btn-default">Cliente: @Model.Select(x => x.Clientes.Nome).FirstOrDefault()</a>
+        <a class="btn btn-default">Situação: ATIVO</a>
+    </div>
+    <br />
+    <div class="btn-group" role="group" aria-label="...">
+        <a class="btn btn-default">Grupo/Cota: @Model.Select(x => x.Clientes.Grupos.Nome).FirstOrDefault()/@Model.Select(x => x.Clientes.Cota_id).FirstOrDefault()</a>
+    </div>
+
+    <div id="tst">
+        @Html.ActionLink("Novo Atendimento", "Create","Atendimento",new { id = Model.Select(x=>x.Clientes.ClienteId).FirstOrDefault() },new { @class= "btn btn-primary pull-left btn-tst", @style= "" }               )
+        
+
+    </div>
+    <br />
+</div>
+<br />
+<br />
+<br />
 <table class="table">
     <tr>
-        <th>Cliente</th>
-        <th>Data do relato</th>
-        <th>Grupo</th>
-        <th>Cota</th>
-        <th>Status do atendimento</th>
-        <th>Status do boleto</th>
+        <th>Processo</th>
+        <th>Tipo de Atendimento</th>
+        <th>Data do Relato</th>
+        <th>Alteração</th>
+        <th>Boleto Enviado</th>
+        <th>Lance</th>
+        <th>Comentario</th>
     </tr>
 
     @foreach (var atendimento in Model)
     {
     <tr>
-        <td>@Html.ActionLink(atendimento.Clientes.Nome, "DetailsByIdDetail", new { id = atendimento.Atendimento_id })</td>
-        <td>@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</td>
-        <td>@Html.DisplayFor(modelItem => atendimento.Clientes.Grupos.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => atendimento.Clientes.Cota_id)</td>
-        <td>@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>
-
+        <td><a href="#">Pós venda</a></td>
+        @*<td>@Html.ActionLink(atendimento.Clientes.Nome, "DetailsByIdDetail", new { id = atendimento.Atendimento_id })</td>*@
+        <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</a></td>
+        <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</a></td>
+        <td><a href="#"></a></td>
+        <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>
+        <td><a href="#">@string.Format("{0:C}", atendimento.Valor_ofertado)</a></td>
+        @*<td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>*@
+        <td><a href="#" onclick="getTextoComentario(@atendimento.Atendimento_id)">Ler Relato</a></td>
         <td>
 
-        <td><i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = atendimento.Atendimento_id })</i></td>
+            @*<td><i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = atendimento.Atendimento_id })</i></td>*@
 
     </tr>
 
     }
 </table>
+<div id="txtAtendimento" style="visibility:hidden;">
+    <h4>Atendente: HOMOLOGAÇÃO </h4>
+        <textarea id="areaTxtDocumentos" rows="4" cols="100">
+            
+        </textarea>
+</div>
+
+<script>
+    function getTextoComentario(idAtendimento) {
+        console.log(idAtendimento);
+        $(function () {
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "/Atendimento/GetComentario",
+                data: { atendimentoId: idAtendimento },
+                success: function (dados) {
+                    document.getElementById("txtAtendimento").style.visibility = "visible";
+                    document.getElementById('areaTxtDocumentos').value = dados;
+                    console.log(dados);
+                }
+            });
+        });
+
+    }
+
+</script>

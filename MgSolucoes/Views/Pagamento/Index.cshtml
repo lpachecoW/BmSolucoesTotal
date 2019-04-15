@@ -31,7 +31,7 @@
             @pagamento.Dt_Pagamento
         </td>
         <td>
-            @string.Format("{0:#,0.00}", pagamento.Valor_Pago)
+            @string.Format("{0:C}", pagamento.Valor_Pago)
         </td>
         <td>
             @Html.DisplayFor(modelItem => pagamento.Parcela_num)
