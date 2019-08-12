@@ -13,5 +13,6 @@ namespace MgSolucoes.Models
         [Key]
         public int Status_Atendimento_id { get; set; }
         public string Nome { get; set; }
+        public string cor { get; set; }
     }
 }

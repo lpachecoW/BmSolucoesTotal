@@ -38,6 +38,10 @@ namespace MgSolucoes.Models
         public virtual Grupos Grupos { get; set; }
         public int Cliente_Atendimento_Id{ get; set; }
         public virtual Cliente_Atendimento Cliente_Atendimento { get; set; }
+        public int Status_Atendimento_Id { get; set; }
+        public virtual Status_Atendimento Status_Atendimento { get; set; }
+        
+
 
 
 

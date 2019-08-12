@@ -90,10 +90,14 @@
     <div class="btn-group" role="group" aria-label="...">
         <a class="btn btn-default">Grupo/Cota: @Model.Select(x => x.Clientes.Grupos.Nome).FirstOrDefault()/@Model.Select(x => x.Clientes.Cota_id).FirstOrDefault()</a>
     </div>
+    <div class="btn-group" role="group" aria-label="...">
+        <a class="btn btn-default">Representacao: @Model.Select(x => x.Clientes.Representacoes.Nome).FirstOrDefault()</a>
+    </div>
+
 
     <div id="tst">
-        @Html.ActionLink("Novo Atendimento", "Create","Atendimento",new { id = Model.Select(x=>x.Clientes.ClienteId).FirstOrDefault() },new { @class= "btn btn-primary pull-left btn-tst", @style= "" }               )
-        
+        @Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = Model.Select(x => x.Clientes.ClienteId).FirstOrDefault() }, new { @class = "btn btn-primary pull-left btn-tst", @style = "" })
+
 
     </div>
     <br />
@@ -109,7 +113,9 @@
         <th>Alteração</th>
         <th>Boleto Enviado</th>
         <th>Lance</th>
+        <th>Operador</th>
         <th>Comentario</th>
+
     </tr>
 
     @foreach (var atendimento in Model)
@@ -123,6 +129,9 @@
         <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>
         <td><a href="#">@string.Format("{0:C}", atendimento.Valor_ofertado)</a></td>
         @*<td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>*@
+        @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendente_id)</a></td>*@
+        <td><a href="#">HOMOLOGAÇÃO</a></td>
+
         <td><a href="#" onclick="getTextoComentario(@atendimento.Atendimento_id)">Ler Relato</a></td>
         <td>
 

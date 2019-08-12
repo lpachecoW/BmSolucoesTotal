@@ -36,6 +36,10 @@ namespace MgSolucoes.Models
         [Display(Name = "Lance Foi Ofertado?")]
         public Int32 Status_Lance_id { get; set; }
 
+        public Int32? Contatado { get; set; }
+
+        public Int32? Procon { get; set; }
+
         [Display(Name = "Valor Ofertado")]
         public decimal Valor_ofertado { get; set; }
 

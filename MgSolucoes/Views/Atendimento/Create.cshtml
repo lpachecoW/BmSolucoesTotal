@@ -47,6 +47,34 @@
         </div>
     </div>
 
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Contato?</label>
+        <div class="col-md-10">
+            <select class="form-control" data-val="true" data-val-required="O campo Lance Foi Ofertado? é obrigatório." id="Contatado" name="Contatado">
+                <option value="">Contato?</option>
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Procon?</label>
+        <div class="col-md-10">
+            <select class="form-control" data-val="true" data-val-required="O campo Lance Foi Ofertado? é obrigatório." id="Procon" name="Procon">
+                <option value="">Procon?</option>
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+            </select>
+        </div>
+    </div>
+
+
+
+
+
     <div class="form-group">
         @Html.LabelFor(m => m.Valor_ofertado, new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -62,14 +90,14 @@
         </div>
     </div>
 </div>
-}
-<div>
-</div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $('#Dt_Cadastro').val(Date)
-    $('#Dt_Nascimento').val(Date)
-    
-    </script>
-}
+    }
+    <div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $('#Dt_Cadastro').val(Date)
+            $('#Dt_Nascimento').val(Date)
+
+        </script>
+    }

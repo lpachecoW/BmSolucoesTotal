@@ -93,6 +93,12 @@
 </style>
 
 
+<script>
+    $(function () {
+
+    });
+</script>
+
 
 <div>
     
@@ -114,9 +120,6 @@
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
                 <input type="text" id="myInput" name="grupoNome" placeholder="Digite o grupo">
-            </div>
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
             </div>
             <div class="btn-group" role="group">
                 <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
@@ -168,9 +171,9 @@
 
     <tr>
         <td>
-            @if (cliente.HasAtendimento == 1)
-            {
-                <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasContato" })</i>
+            @if (cliente.Status_Atendimento_Id != 0)
+            {   
+                <i class="material-icons md-36" style="color:@cliente.Status_Atendimento.cor">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:"+cliente.Status_Atendimento.cor + "" })</i>
             }
             else
             {

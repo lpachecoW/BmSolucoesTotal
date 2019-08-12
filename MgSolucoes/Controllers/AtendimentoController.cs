@@ -109,8 +109,11 @@ namespace MgSolucoes.Controllers
                 atendimento.Status_Lance_id = model.Status_Lance_id;
                 atendimento.Atendente_id = "1";
                 cliente.HasAtendimento = model.Status_Atendimento_id;
+                cliente.Status_Atendimento_Id = model.Status_Atendimento_id;
                 atendimento.Valor_ofertado = model.Valor_ofertado;
-                
+                atendimento.Procon = model.Procon;
+                atendimento.Contatado = model.Contatado;
+
                 try
                 {   
                     db.Atendimentos.Add(atendimento);

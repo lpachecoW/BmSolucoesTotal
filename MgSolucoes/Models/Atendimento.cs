@@ -24,6 +24,10 @@ namespace MgSolucoes.Models
         public string Atendente_id { get; set; }
         public decimal Valor_ofertado { get; set; }
 
+        public int? Contatado { get; set; }
+        public int? Procon { get; set; }
+        public DateTime? Alteracao { get; set; }
+
         [Required(AllowEmptyStrings = true)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
 
@@ -38,8 +42,8 @@ namespace MgSolucoes.Models
 
         public int Clienteid { get; set; }
         public virtual Cliente Clientes { get; set; }
-        public int Cliente_Atendimento_Id { get; set; }
-        public virtual Cliente_Atendimento Cliente_Atendimento { get; set; }
+        //public int Cliente_Atendimento_Id { get; set; }
+        //public virtual Cliente_Atendimento Cliente_Atendimento { get; set; }
 
 
     }

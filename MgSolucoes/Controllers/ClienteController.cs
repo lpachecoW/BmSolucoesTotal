@@ -20,11 +20,12 @@ namespace MgSolucoes.Controllers
         }
 
         // GET: Cliente
-        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, int? page)
+        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, string CPF,string statusCli, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NomeSortParm = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
             ViewBag.RepSortParam = String.IsNullOrEmpty(sortOrder) ? "representacoes" : "";
+            ViewBag.ddlListRepresentacao = "";
             var first = "";
             var last = "";
             var hasNome = false;
@@ -128,6 +129,37 @@ namespace MgSolucoes.Controllers
                 }
             }
 
+            if (!String.IsNullOrEmpty(CPF))
+            {
+                if (hasNome && hasGrupo && hasCota)
+                {
+                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome) && s.Cpf.Contains(CPF));
+                }
+                else if (hasNome)
+                {
+                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Cpf.Contains(CPF));
+                }
+                else if (hasNome && hasGrupo)
+                {
+                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome) && s.Cpf.Contains(CPF));
+                }
+                else if (hasGrupo)
+                {
+                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Cpf.Contains(CPF));
+                }
+                else if (hasCota)
+                {
+                    clientes = clientes.Where(s => s.Cpf.Contains(CPF) && s.Cota_id.Contains(cotaNome));
+                }
+                else
+                {
+                    clientes = clientes.Where(s => s.Cpf.Contains(CPF));
+                }
+
+            }
+
+            
+
             //clientes = clientes.Where(x => x.HasAtendimento == 0);
 
             switch (sortOrder)
@@ -188,6 +220,8 @@ namespace MgSolucoes.Controllers
                 if (model.TipoBemId == 0) { cliente.TipoBemId = 6; } else { cliente.TipoBemId = model.TipoBemId; }
                 cliente.Dt_Cadastro = DateTime.UtcNow;
                 cliente.HasAtendimento = 0;
+                cliente.Cliente_Atendimento_Id = 0;
+                cliente.Status_Atendimento_Id = 2;
                 
                 
                 try
