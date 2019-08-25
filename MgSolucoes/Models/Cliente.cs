@@ -28,6 +28,7 @@ namespace MgSolucoes.Models
         public string Atendente_id { get; set; }
         public string Vendedor { get; set; }
         public int HasAtendimento { get; set; }
+        public int? Cancelado { get; set; }
 
         //Dropdowns
         public int Representacao_id { get; set; }

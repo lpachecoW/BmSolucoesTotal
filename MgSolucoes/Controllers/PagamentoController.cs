@@ -277,7 +277,7 @@ namespace MgSolucoes.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PagamentoId, Dt_Pagamento, Dt_Vencimento,Valor_Pago,Status_Pagamento, Parcela_num")] Pagamento model)
+        public ActionResult Edit([Bind(Include = "PagamentoId, Dt_Pagamento, Dt_Vencimento,Valor_Pago,Status_Pagamento, Parcela_num,Comentario_Pagamento")] Pagamento model)
         {
 
             var pagamento = db.Pagamentos.Find(model.PagamentoId);
@@ -291,15 +291,32 @@ namespace MgSolucoes.Controllers
                 pagamento.Valor_Pago = model.Valor_Pago;
                 pagamento.Status_Pagamento = model.Status_Pagamento;
                 pagamento.Parcela_num = model.Parcela_num;
+                if (String.IsNullOrEmpty(model.Comentario_Pagamento))
+                {
+                    pagamento.Comentario_Pagamento = "Não há comentario cadastrado.";
+                }
+                else {
+
+                    pagamento.Comentario_Pagamento = model.Comentario_Pagamento;
+                }
+                
                 db.SaveChanges();
             }
             
 
             
-            return RedirectToAction("Index");
+            return RedirectToAction("ContasAReceberPorCliente/" + pagamento.Clienteid);
 
             //ViewBag.Categorias = db.Categorias;
 
+        }
+
+        public JsonResult GetComentario(int pagamentoId)
+        {
+            Pagamento pagamento = db.Pagamentos.Find(pagamentoId);
+
+            var resultado = pagamento.Comentario_Pagamento.ToString();
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
     }

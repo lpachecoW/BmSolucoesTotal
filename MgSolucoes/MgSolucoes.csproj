@@ -212,6 +212,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
+    <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\RepresentacaoController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\Tipo_BemController.cs" />
@@ -239,6 +240,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Pagamento.cs" />
     <Compile Include="Models\PagamentoViewModel.cs" />
+    <Compile Include="Models\RelatoriosViewModel.cs" />
+    <Compile Include="Models\Relatorios_Descretiva.cs" />
     <Compile Include="Models\Representacao.cs" />
     <Compile Include="Models\RepresentacaoViewModel.cs" />
     <Compile Include="Models\Status_Atendimento.cs" />
@@ -437,6 +440,8 @@
     <Content Include="Views\Pagamento\BmParcelasAReceber.cshtml" />
     <Content Include="Views\Representacao\Edit.cshtml" />
     <Content Include="Views\Pagamento\Edit.cshtml" />
+    <Content Include="Views\Relatorios\Index.cshtml" />
+    <Content Include="Views\Cliente\CancelarCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,87 +5,193 @@
     ViewBag.Title = "Pagamento cliente";
 }
 
+<style>
+    /* Rules for sizing the icon. */
+    .material-icons.md-18 {
+        font-size: 18px;
+    }
+
+    .material-icons.md-24 {
+        font-size: 24px;
+    }
+
+    .material-icons.md-36 {
+        font-size: 36px;
+    }
+
+    .material-icons.md-48 {
+        font-size: 48px;
+    }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+            .tooltip .tooltiptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    tr:hover {
+        background: #0094ff;
+    }
+
+    #tst {
+        background: purple;
+        position: relative;
+    }
+
+        #tst h1 {
+            text-align: center;
+        }
+
+    .btn-tst {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
+</style>
 
 
 
+<div>
+    <p>Cliente: <span>@Model.Select(x => x.Clientes.Nome).FirstOrDefault()</span></p>
+</div>
+
+<div>
+    <p>Status:<span>@Model.Select(x => x.Clientes.Status_Atendimento.Nome).FirstOrDefault()</span></p>
+    
+</div>
+<div>
+    <p>Representacao:<span>@Model.Select(x => x.Clientes.Representacoes.Nome).FirstOrDefault()</span></p>
+    
+</div>
+
+
+<br />
+<br />
+<br />
 
 <table class="table">
     <tr>
-        <th>Cliente</th>
-        <th></th>
-        <th>Grupo</th>
-        <th>Cota</th>
-        <th>Vencimento</th>
-        <th>Valor do credito</th>
         <th>Parcela</th>
-        <th>Comissão 1%</th>
+        <th>Credito</th>
+        <th>Vencimento</th>
+        <th>Pagamento</th>
+        <th>Contemplado</th>
         <th></th>
-        
-
-
+        <th>Status</th>
+        <th></th>
     </tr>
+
+
 
     @foreach (var pagamento in Model)
     {
-    <tr>
-        <td>@Html.ActionLink(pagamento.Clientes.Nome, "DetalhaPagamentoByClienteId", new { id = pagamento.PagamentoId })</td>
-        @if (pagamento.Status_Pagamento.Equals("PAGO"))
-        {
+        <tr>
 
+
+            <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
+            <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Valor_Credito)</td>
+            <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
+            <td>@Html.DisplayFor(modelItem => pagamento.Dt_Pagamento)</td>
             <td>
-                <i class="material-icons md-36" id="stsPago">
-
-                    <i class="material-icons">
-                        done_outline
-                    </i>
-                    <input hidden="hidden" id="idPayment" value="@pagamento.PagamentoId" />
-
-                </i>
+                <input type="radio" id="huey" name="drone" value="1" checked>
+                <label for="huey"></label>
             </td>
+            @if (pagamento.Status_Pagamento.Equals("PAGO"))
+            {
 
+                <td>
+                    <i class="material-icons md-36" id="stsPago">
 
-        }
-        else
-        {
-            <td>
-                <i class="material-icons md-36" id="notPayed" onclick="atualizaPagamento(@pagamento.PagamentoId)">
-                    <a href="#">
                         <i class="material-icons">
-                            cached
+                            done_outline
                         </i>
+                        <input hidden="hidden" id="idPayment" value="@pagamento.PagamentoId" />
 
-                    </a>
-                </i>
-            </td>
+                    </i>
+                </td>
 
+
+            }
+            else
+            {
+                <td>
+                    <i class="material-icons md-36" id="notPayed" onclick="atualizaPagamento(@pagamento.PagamentoId)">
+                        <a href="#">
+                            <i class="material-icons">
+                                cached
+                            </i>
+
+                        </a>
+                    </i>
+                </td>
+
+            }
+
+            <td>@Html.ActionLink("Editar", "Edit", new { id = pagamento.PagamentoId })</td>
+            <td>
+                @if (string.IsNullOrEmpty(pagamento.Comentario_Pagamento))
+                {
+                <td></td>
+            }
+            else
+            {
+                <td><a href="#" onclick="getTextoComentario(@pagamento.PagamentoId)">Informe de pagamento</a></td>
+            }
+
+
+            </tr>
         }
 
-        <td>@Html.DisplayFor(modelItem => pagamento.Grupos.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Cota_id)</td>
-        <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
-        <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Valor_Credito)</td>
-        <td>@Html.DisplayFor(modelItem => pagamento.Parcela_num)</td>
-        <td>@string.Format("{0:C}", pagamento.Valor_Pago)</td>
-        @*<td>@Html.DisplayFor(modelItem => pagamento.Valor_Pago)</td>*@
-        <td>@Html.ActionLink("Editar", "Edit", new { id = pagamento.PagamentoId })</td>
-       
-
-        <td>
-
-
-    </tr>
-    }
-    
 </table>
 @*<div style="margin-left:70%;">
-    <p>Totais: <span>@string.Format("{0:C}", ViewBag.TotalPago)</span></p>
-    
-</div>*@
+        <p>Totais: <span>@string.Format("{0:C}", ViewBag.TotalPago)</span></p>
+
+    </div>*@
+
+<div id="txtAtendimento" style="visibility:hidden;">
+    <h4>Pagamento: HOMOLOGA </h4>
+    <textarea id="areaTxtDocumentos" rows="4" cols="100">
+            
+        </textarea>
+</div>
 
 <script>
 
     function atualizaPagamento(idPayment) {
-        
+
         $(function () {
             $.ajax({
                 dataType: "json",
@@ -94,7 +200,7 @@
                 data: { idPagamento: idPayment },
                 success: function (dados) {
                     if (dados.Sucess) {
-                         location.reload();
+                        location.reload();
                     }
                 }
             });
@@ -102,6 +208,28 @@
 
     }
 
-   
+
+</script>
+
+
+<script>
+    function getTextoComentario(idAtendimento) {
+
+        $(function () {
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "/Pagamento/GetComentario",
+                data: { pagamentoId: idAtendimento },
+                success: function (dados) {
+                    document.getElementById("txtAtendimento").style.visibility = "visible";
+                    document.getElementById('areaTxtDocumentos').value = dados;
+                    console.log(dados);
+                }
+            });
+        });
+
+    }
+
 </script>
 

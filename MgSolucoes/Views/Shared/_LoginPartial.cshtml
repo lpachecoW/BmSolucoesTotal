@@ -16,7 +16,9 @@
             Clientes <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            Clientes
+            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+            <li>@Html.ActionLink("Atendimentos realizados", "AtendimentosRealizados", "Atendimento")</li>
+            <li>@Html.ActionLink("Clientes", "Index", "Cliente")</li>
         </ul>
     </li>
     <li role="presentation" class="dropdown">
@@ -24,7 +26,10 @@
             Relatorios <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            Pagamentos
+            <li>@Html.ActionLink("Comissao", "Index", "Comissao")</li>
+            <li>@Html.ActionLink("Pagamento", "ContasAReceber", "Pagamento")</li>
+            <li>@Html.ActionLink("BM a receber", "BmParcelasAReceber", "Pagamento")</li>
+            <li>@Html.ActionLink("Relatorios", "Index", "Relatorios")</li>
         </ul>
     </li>
    
@@ -33,10 +38,12 @@
             Cadastros <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            Pagamentos
+            <li>@Html.ActionLink("Cadastrar representacao", "Index", "Representacao")</li>
+            <li>@Html.ActionLink("Cadastrar grupos", "Index", "Grupos")</li>
+
         </ul>
     </li>
-    <li>
+    <li>    
         @Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
     </li>
     <li><a href="javascript:document.getElementById('logoutForm').submit()">Fazer logoff</a></li>

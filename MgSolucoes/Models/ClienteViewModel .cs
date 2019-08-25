@@ -56,5 +56,6 @@ namespace MgSolucoes.Models
         public String Vendedor { get; set; }
         
         public int HasAtendimento { get; set; }
+        public int Cancelado { get; set; }
     }
 }

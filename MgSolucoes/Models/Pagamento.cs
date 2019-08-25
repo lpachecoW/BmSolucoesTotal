@@ -19,7 +19,8 @@ namespace MgSolucoes.Models
         public decimal Valor_Pago { get; set; }
         public string Status_Pagamento { get; set; }
         public int Parcela_num { get; set; }
-        
+        public string Comentario_Pagamento { get; set; }
+
         public int Clienteid { get; set; }
         public virtual Cliente Clientes { get; set; }
 

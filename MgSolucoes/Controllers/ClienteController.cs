@@ -222,7 +222,7 @@ namespace MgSolucoes.Controllers
                 cliente.HasAtendimento = 0;
                 cliente.Cliente_Atendimento_Id = 0;
                 cliente.Status_Atendimento_Id = 2;
-                
+                cliente.Cancelado = 0;
                 
                 try
                 {   
@@ -288,6 +288,31 @@ namespace MgSolucoes.Controllers
             
             return View(cliente);
         }
+
+        public ActionResult CancelarCliente(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(cliente);
+        }
+
+        [HttpPost, ActionName("CancelarCliente")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmaCancelamento(int id)
+        {
+            Cliente cliente = db.Clientes.Find(id);
+            cliente.Cancelado = 1;
+            cliente.Status_Atendimento_Id = 7;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

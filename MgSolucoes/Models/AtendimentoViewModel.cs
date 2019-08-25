@@ -44,5 +44,7 @@ namespace MgSolucoes.Models
         public decimal Valor_ofertado { get; set; }
 
         public String Atendente_id { get; set; }
+
+        public Cliente cliente { get; set; }
     }
 }

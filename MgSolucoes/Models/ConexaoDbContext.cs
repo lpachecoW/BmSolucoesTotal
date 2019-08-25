@@ -16,6 +16,7 @@ namespace MgSolucoes.Models
         public DbSet<Contrato> Contratos { get; set; }
         public DbSet<Pagamento>Pagamentos { get; set; }
         public DbSet<Status_Atendimento> Status_Atendimentos{ get; set; }
+        public DbSet<Relatorios_Descretiva> relatorios_Descretivas { get; set; }
         public DbSet<Status_Pagamento> Status_Pagamentos { get; set; }
         public DbSet<Status_Lance> Status_Lance { get; set; }
         public DbSet<Comissao> Comissoes{ get; set; }

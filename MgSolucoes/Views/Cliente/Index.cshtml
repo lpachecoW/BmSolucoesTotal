@@ -209,8 +209,10 @@
                     <li>@Html.ActionLink("Editar Registro", "Edit", new { id = cliente.ClienteId })</li>
                     <li>@Html.ActionLink("Excluir Cliente", "Delete", new { id = cliente.ClienteId })</li>
                     <li>@Html.ActionLink("Baixa de Pagamento", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</li>
+                    <li>@Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = cliente.ClienteId })</li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Cancelar Cliente</a></li>
+                    <li>@Html.ActionLink("Cancelar Cliente", "CancelarCliente", new { id = cliente.ClienteId })</li>
+
                 </ul>
             </div>
 

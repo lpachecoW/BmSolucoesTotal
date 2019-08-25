@@ -31,6 +31,8 @@ namespace MgSolucoes.Models
         [Display(Name = "Parcela")]
         public int Parcela_num { get; set; }
 
+        [Display(Name = "Comentario Pagamento")]
+        public string Comentario_Pagamento{ get; set; }
 
 
     }
