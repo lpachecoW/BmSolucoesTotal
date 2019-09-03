@@ -1,137 +1,64 @@
 ﻿@model PagedList.IPagedList<MgSolucoes.Models.Cliente>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/inicial.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Clientes";
 }
 
-<style>
-    #myInput {
-        background-image: url('/css/searchicon.png');
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        width: 100%;
-        font-size: 16px;
-        padding: 12px 20px 12px 40px;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
-    }
 
-    /* Rules for sizing the icon. */
-    .material-icons.md-18 {
-        font-size: 18px;
-    }
-
-    .material-icons.md-24 {
-        font-size: 24px;
-    }
-
-    .material-icons.md-36 {
-        font-size: 36px;
-    }
-
-    .material-icons.md-48 {
-        font-size: 48px;
-    }
-
-    .tooltip {
-        position: relative;
-        display: inline-block;
-        border-bottom: 1px dotted black;
-    }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 120px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-            .tooltip .tooltiptext::after {
-                content: "";
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                margin-left: -5px;
-                border-width: 5px;
-                border-style: solid;
-                border-color: #555 transparent transparent transparent;
-            }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
-    .hasntContato {
-        color: white;
-    }
-
-    .hasContato {
-        color: green;
-    }
-
-    #toogleFiltros {
-        width: 100%;
-        padding: 50px 0;
-        text-align: center;
-        margin-top: 20px;
-    }
-    #filtros {
-     font-size:16px;
-    }
-</style>
-
-
-<script>
-    $(function () {
-
-    });
-</script>
+<br />
+<br />
+<br />
 
 
 <div>
-    
-    <br />
-</div>
-<br />
-
-<div id="foo" style="display:block;">
     @using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
     {
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="clienteNome" placeholder="Busca por nome do cliente">
-            </div>
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="representacaoNome" placeholder="Digite a representação">
-            </div>
-        </div>
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="grupoNome" placeholder="Digite o grupo">
-            </div>
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
-            </div>
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="CPF" placeholder="Digite o CPF">
-            </div>
-            <div class="btn-group" role="group">
-                <input type="text" id="myInput" name="statusCli" placeholder="Status do cliente">
-            </div>
-        </div>
 
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <input type="text" id="myInput" name="clienteNome" class="btn btn-default" placeholder="Busca por nome do cliente">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    @Html.DropDownList("Grupo_id", new SelectList(ViewBag.ddlGrupo, "Grupo_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
+                </div>
+            </div>
+          
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <input type="text" id="myInput" name="CPF" placeholder="Digite o CPF">
+                </div>
+            </div>
+            @*<div class="col-md-4">
+                <div class="form-group label-floating">
+                    @Html.DropDownList("Status_Atendimento_id", new SelectList(ViewBag.ddlStatusAtendimento, "Status_Atendimento_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
+                </div>
+            </div>*@
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <input type="text" id="myInput" name="CPF" placeholder="Cliente Contatado?">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group label-floating">
+                    <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
+                </div>
+            </div>
+        </div>
+    </div>
+    
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
                 <input type="submit" value="Buscar" />
@@ -139,102 +66,92 @@
                 <input type="button" value="Novo Cliente" onclick="location.href='@Url.Action("Create", "Cliente")'" />
             </div>
         </div>
-        
 
 
-            
-            
-            
+
+
+
+
 
 
     }
 </div>
-<br />
+        <br />
 
-<br />
+        <br />
 
-<table class="table">
-    <tr>
-        <th></th>
-        <th>@Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NomeSortParm, currentFilter = ViewBag.CurrentFilter })</th>
-        <th>Grupo/Cota</th>
-        <th>Telefone</th>
-        <th>Representacoes</th>
-        <th>Dias em Atraso</th>
-        @*<th>Baixa Parcela</th>*@
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>@Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NomeSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                <th>Grupo/Cota</th>
+                <th>Telefone</th>
+                <th>Representacoes</th>
+                <th>Dias em Atraso</th>
+                @*<th>Baixa Parcela</th>*@
 
 
-    </tr>
+            </tr>
 
-    @foreach (var cliente in Model)
-    {
-
-    <tr>
-        <td>
-            @if (cliente.Status_Atendimento_Id != 0)
-            {   
-                <i class="material-icons md-36" style="color:@cliente.Status_Atendimento.cor">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:"+cliente.Status_Atendimento.cor + "" })</i>
-            }
-            else
+            @foreach (var cliente in Model)
             {
-                <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasntContato" })</i>
+
+                <tr>
+                    <td>
+                        @if (cliente.Status_Atendimento_Id != 0)
+                        {
+                            <i class="material-icons md-36" style="color:@cliente.Status_Atendimento.cor">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:" + cliente.Status_Atendimento.cor + "" })</i>
+                        }
+                        else
+                        {
+                            <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasntContato" })</i>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)
+                    </td>
+                    <td id="Tel_Fixo">
+                        @Html.DisplayFor(modelItem => cliente.Tel_Fixo)
+                        <br />
+                        @Html.DisplayFor(modelItem => cliente.Tel_Movel)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => cliente.Representacoes.Nome)
+                    </td>
+                    <td>
+                        @cliente.DiasEmAtraso
+                    </td>
+
+
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ...
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Editar Registro", "Edit", new { id = cliente.ClienteId })</li>
+                                <li>@Html.ActionLink("Excluir Cliente", "Delete", new { id = cliente.ClienteId })</li>
+                                <li>@Html.ActionLink("Baixa de Pagamento", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</li>
+                                @*<li>@Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = cliente.ClienteId })</li>*@
+                                <li role="separator" class="divider"></li>
+                                <li>@Html.ActionLink("Cancelar Cliente", "CancelarCliente", new { id = cliente.ClienteId })</li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+
+                </tr>
             }
-        </td>
-        <td>
-            @Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)
-        </td>
-        <td id="Tel_Fixo">
-            @Html.DisplayFor(modelItem => cliente.Tel_Fixo)
-            <br />
-            @Html.DisplayFor(modelItem => cliente.Tel_Movel)
-        </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => cliente.Representacoes.Nome)
-        </td>
-        <td>
-            1
-        </td>
-       
-        
-        <td>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ...
-                </button>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Editar Registro", "Edit", new { id = cliente.ClienteId })</li>
-                    <li>@Html.ActionLink("Excluir Cliente", "Delete", new { id = cliente.ClienteId })</li>
-                    <li>@Html.ActionLink("Baixa de Pagamento", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</li>
-                    <li>@Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = cliente.ClienteId })</li>
-                    <li role="separator" class="divider"></li>
-                    <li>@Html.ActionLink("Cancelar Cliente", "CancelarCliente", new { id = cliente.ClienteId })</li>
+        </table>
+        <br />
+        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-                </ul>
-            </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
-        </td>
-
-    </tr>
-    }
-
-</table>
-<br />
-Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-
-<script>
-
-
-    function toggle_visibility(id) {
-        var e = document.getElementById(id);
-        if (e.style.display == 'block')
-            e.style.display = 'block';
-        else
-            e.style.display = 'block';
-    }
-</script>
+      

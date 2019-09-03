@@ -14,18 +14,35 @@ namespace MgSolucoes.Controllers
     public class ClienteController : Controller
     {
         ConexaoDbContext db;
+        ConexaoDbContext dbPag;
+
 
         public ClienteController() {
             db = new ConexaoDbContext();
+            dbPag = new ConexaoDbContext();
         }
 
         // GET: Cliente
-        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, string CPF,string statusCli, int? page)
+        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, string CPF,string statusCli, int? Representacao_id, int? Status_Atendimento_id, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NomeSortParm = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
             ViewBag.RepSortParam = String.IsNullOrEmpty(sortOrder) ? "representacoes" : "";
-            ViewBag.ddlListRepresentacao = "";
+
+            
+            ViewBag.ddlGrupo = db.Grupos;
+            ViewBag.ddlRepresentacao = db.Representacoes;
+            ViewBag.ddlStatusAtendimento = db.Status_Atendimentos;
+
+            if (grupoNome == "39") {
+                grupoNome = null;
+            }
+
+            if (Representacao_id == 5) {
+                Representacao_id = 0;
+            }
+
+
             var first = "";
             var last = "";
             var hasNome = false;
@@ -50,8 +67,10 @@ namespace MgSolucoes.Controllers
             var clientes = from s in db.Clientes
                            select s;
 
+            var pagamentos = dbPag.Pagamentos.ToList();
+
             if (!String.IsNullOrEmpty(clienteNome)) {
-                clientes = clientes.Where(s => s.Nome.Contains(clienteNome));
+                clientes = clientes.Where(s => s.Nome == clienteNome);
                 hasNome = true;
             }
 
@@ -60,11 +79,11 @@ namespace MgSolucoes.Controllers
             {
                 if (hasNome)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Grupos.Nome.Contains(grupoNome));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome);
                     hasGrupo = true;
                 }
                 else {
-                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome));
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome);
                 }
             }
 
@@ -73,18 +92,18 @@ namespace MgSolucoes.Controllers
                 hasCota = true;
                 if (hasNome && hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome);
                 }
                 else if (hasNome)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Cota_id == cotaNome);
                 }
                 else if (hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome);
                 }
                 else {
-                    clientes = clientes.Where(s => s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Cota_id ==cotaNome);
                 }
                 
             }
@@ -93,37 +112,37 @@ namespace MgSolucoes.Controllers
             {
                 if (hasNome && hasGrupo && hasCota)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome) && s.Representacoes.Nome.Contains(representacaoNome));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Representacoes.Nome == representacaoNome);
                 }
                 else if (hasNome)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Representacoes.Nome.Contains(representacaoNome));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Representacoes.Nome == representacaoNome);
                 }
                 else if (hasNome && hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome);
                 }
                 else if (hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Representacoes.Nome.Contains(representacaoNome));
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Representacoes.Nome == representacaoNome);
                 }
                 else if (hasCota) {
-                    clientes = clientes.Where(s => s.Representacoes.Nome.Contains(representacaoNome) && s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Representacoes.Nome == representacaoNome && s.Cota_id == cotaNome);
                 }
                 else
                 {
-                    clientes = clientes.Where(s => s.Representacoes.Nome.Contains(representacaoNome));
+                    clientes = clientes.Where(s => s.Representacoes.Nome == representacaoNome);
                 }
                 
             }
 
             if (!String.IsNullOrEmpty(comAtendimento))
             {
-                if (comAtendimento.Equals("S"))
+                if (comAtendimento == "S")
                 {
                     clientes = clientes.Where(s => s.HasAtendimento == 1);
                 }
-                if (comAtendimento.Equals("N"))
+                if (comAtendimento == "N")
                 {
                     clientes = clientes.Where(s => s.HasAtendimento == 0);
                 }
@@ -133,36 +152,79 @@ namespace MgSolucoes.Controllers
             {
                 if (hasNome && hasGrupo && hasCota)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome) && s.Cpf.Contains(CPF));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Cpf == CPF);
                 }
                 else if (hasNome)
                 {
-                    clientes = clientes.Where(s => s.Nome.Contains(clienteNome) && s.Cpf.Contains(CPF));
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Cpf == CPF);
                 }
                 else if (hasNome && hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Grupos.Nome.Contains(grupoNome) && s.Cota_id.Contains(cotaNome) && s.Cpf.Contains(CPF));
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Cpf == CPF);
                 }
                 else if (hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Grupos.Nome.Contains(grupoNome) && s.Cpf.Contains(CPF));
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Cpf == CPF);
                 }
                 else if (hasCota)
                 {
-                    clientes = clientes.Where(s => s.Cpf.Contains(CPF) && s.Cota_id.Contains(cotaNome));
+                    clientes = clientes.Where(s => s.Cpf == CPF && s.Cota_id == cotaNome);
+                }
+                else if (Representacao_id != 0)
+                {
+                    clientes = clientes.Where(s => s.Cpf == CPF && s.Representacoes.Representacao_id == Representacao_id);
                 }
                 else
                 {
-                    clientes = clientes.Where(s => s.Cpf.Contains(CPF));
+                    clientes = clientes.Where(s => s.Cpf == CPF);
                 }
 
             }
 
-            
+            if (Representacao_id != 0 && Representacao_id != null)
+            {
+                if (hasNome && hasGrupo && hasCota)
+                {
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Representacoes.Representacao_id == Representacao_id);
+                }
+                else if (hasNome)
+                {
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Cpf == CPF);
+                }
+                else if (hasNome && hasGrupo)
+                {
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Representacoes.Representacao_id == Representacao_id);
+                }
+                else if (hasGrupo)
+                {
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Representacoes.Representacao_id == Representacao_id);
+                }
+                else if (hasCota)
+                {
+                    clientes = clientes.Where(s => s.Representacoes.Representacao_id == Representacao_id && s.Cota_id == cotaNome);
+                }
+                else if (Representacao_id != null)
+                {
+                    clientes = clientes.Where(s => s.Representacoes.Representacao_id == Representacao_id);
+                }
+                else
+                {
+                    clientes = clientes.Where(s => s.Cpf == CPF);
+                }
+
+            }
+
+
+            //Representacao_id
+
+
+            //clientes = clientes.Where
 
             //clientes = clientes.Where(x => x.HasAtendimento == 0);
+           
 
-            switch (sortOrder)
+
+                switch (sortOrder)
             {
                 case "nome_desc":
                     clientes = clientes.OrderBy(s => s.Nome);
@@ -174,8 +236,20 @@ namespace MgSolucoes.Controllers
                     clientes = clientes.OrderBy(s => s.Nome);
                     break;
             }
-            
 
+
+            
+            
+            foreach (var addAtraso in clientes)
+            {
+                var hh = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId).Count();
+                if (hh > 0) {
+                    var jj = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento== "NÃO PAGO").FirstOrDefault();
+                    addAtraso.DiasEmAtraso = Convert.ToInt32((addAtraso.Grupos.Dt_Vencimento - jj.Dt_Vencimento).TotalDays);
+                }
+                
+            }
+            
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -422,6 +496,8 @@ namespace MgSolucoes.Controllers
 
             return View(clientes.ToPagedList(pageNumber, pageSize));
         }
+
+       
 
 
         Boolean AddPagamentosPorContrato(string cliente, int contrato) {

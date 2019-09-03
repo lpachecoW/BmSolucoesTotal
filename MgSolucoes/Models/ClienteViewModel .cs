@@ -47,6 +47,7 @@ namespace MgSolucoes.Models
         
         [Display(Name = "Grupo")]
         public Int32 Grupo_id { get; set; }
+        public Int32 PagamentoId { get; set; }
 
         [Display(Name = "Tipo_bem")]
         public Int32 TipoBemId { get; set; }

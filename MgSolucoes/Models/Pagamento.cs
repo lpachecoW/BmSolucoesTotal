@@ -12,7 +12,7 @@ namespace MgSolucoes.Models
     {
         [Key]
         public int PagamentoId { get; set; }
-        public DateTime Dt_Pagamento { get; set; }
+        public DateTime? Dt_Pagamento { get; set; }
         public DateTime Dt_Vencimento { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C0}")]
