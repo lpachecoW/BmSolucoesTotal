@@ -28,11 +28,29 @@ namespace MgSolucoes.Controllers
             int day = DateTime.Now.Day;
             var ClienteAniversario = db.Clientes.Where(x => x.Dt_nascimento.Day == day && x.Dt_nascimento.Month == month ).Count();
 
+            var AtendimentosDiarios = db.Atendimentos.Where(x=>x.Dt_Atendimento.Date == DateTime.Today).Count();
+            var ClientesSemComunicacao = db.Clientes.Where(x => x.Email.Equals("bm@bmc.om.br") || x.Tel_Fixo.Equals("(00)0000-0000") || x.Tel_Movel.Equals("(00)0000-0000")).Count();
+
+            ViewBag.AtendimentoDiario = AtendimentosDiarios;
+            ViewBag.TotalDeClientes = NovosClientes;
             ViewBag.Aniversariantes = ClienteAniversario;
-            ViewBag.ClientesEmAtraso = ClientesEmAtraso;
-            ViewBag.NovosClientes = NovosClientes;
-            ViewBag.AtendimentoRealizados = AtendimentoRealizados;
-            ViewBag.TotalAtendimentos = TotalAtendimentos;
+            ViewBag.ClientesSemNumEmail = ClientesSemComunicacao;
+
+            ViewBag.Adimplentes = 0;
+            ViewBag.Inadimplentes = 0;
+            ViewBag.Cancelados = 0;
+            ViewBag.ObjetivosConcluidos= 0;
+            ViewBag.Pendente = 0;
+
+            ViewBag.PagamentosMesAtual = 0;
+            ViewBag.PagamentosPagos = 0;
+            ViewBag.PagamentosAtraso = 0;
+
+            ViewBag.BoletosNaoEnviados = 0;
+            ViewBag.BoletosEnviados = 0;
+            
+            
+
             return View();
         }
 

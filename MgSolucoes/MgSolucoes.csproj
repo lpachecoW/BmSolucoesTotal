@@ -443,6 +443,7 @@
     <Content Include="Views\Pagamento\Edit.cshtml" />
     <Content Include="Views\Relatorios\Index.cshtml" />
     <Content Include="Views\Cliente\CancelarCliente.cshtml" />
+    <Content Include="Views\Pagamento\RelatoriosBm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

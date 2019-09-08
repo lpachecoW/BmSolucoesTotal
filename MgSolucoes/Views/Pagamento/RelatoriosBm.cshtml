@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Pagamento>
+@using PagedList.Mvc;
+
+<link href="~/Content/inicial.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Relatorios";
+}
+
+
+
+<div>
+    @using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
+    {
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <select id="tipoRelatorio" name="tipoRelatorio">
+                    <option value="0">Relatorio por:</option>
+                    <option value="1">Clientes Cancelados</option>
+                    <option value="2">Clientes Inadimplentes</option>
+                    <option value="3">Objetivo Concluido</option>
+                    <option value="4">Boas vindas</option>
+                    <option value="5">Borderô</option>
+                    <option value="6">Ocorrencias judicias nos clientes</option>
+                    <option value="7">Vendas mensais</option>
+                    <option value="8">Clientes contemplados</option>
+                </select>
+            </div>
+            <div class="btn-group" role="group">
+                @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <input type="text" id="periodoIni" name="periodoIni" class="btn btn-default" placeholder="Periodo Inicio:">
+            </div>
+            <div class="btn-group" role="group">
+                <input type="text" id="periodoFim" name="periodoFim" class="btn btn-default" placeholder="Periodo Fim:">
+            </div>
+            <div class="btn-group" role="group">
+                <select id="parcelaNum" name="tipoRelatorio">
+                    <option value="0">Parcela</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                </select>
+            </div>
+        </div>
+
+    }
+</div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Valor Pago</th>
+            <th>Parcela num</th>
+            <th>Cliente</th>
+        </tr>
+
+        @foreach (var pagamento in Model)
+        {
+        <tr>
+            <td>@pagamento.Valor_Pago</td>
+            <td>@pagamento.Parcela_num</td>
+            <td>@pagamento.Clientes.Nome</td>
+        </tr>
+        
+        }
+    </table>
+
+
+</div>
+
+
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

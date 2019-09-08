@@ -39,6 +39,39 @@ namespace MgSolucoes.Controllers
             return View(pagamentos.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult RelatoriosBm(string sortOrder, string currentFilter, string tipoRelatorio, string Representacao_id, string periodoIni, string periodoFim, string parcelaNum, int? page) {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NomeSortParm = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            ViewBag.RepSortParam = String.IsNullOrEmpty(sortOrder) ? "representacoes" : "";
+
+            ViewBag.ddlGrupo = db.Grupos;
+            ViewBag.ddlRepresentacao = db.Representacoes;
+            ViewBag.ddlStatusAtendimento = db.Status_Atendimentos;
+
+            var pagamentos = from s in db.Pagamentos
+                           select s;
+
+
+
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    pagamentos = pagamentos.OrderBy(s => s.Representacao_id);
+                    break;
+                case "representacoes":
+                    pagamentos = pagamentos.OrderBy(s => s.Representacao_id);
+                    break;
+                default:
+                    pagamentos = pagamentos.OrderBy(s => s.Representacao_id);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(pagamentos.ToPagedList(pageNumber, pageSize));
+        }
+
         public ActionResult BmParcelasAReceber()
         {
             var bmAReceber = db.Pagamentos.Where(x => x.Clienteid > 0 && x.Status_Pagamento == "PAGO").ToList();
