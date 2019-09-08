@@ -16,49 +16,37 @@
     @using (Html.BeginForm("Index", "Cliente", FormMethod.Get))
     {
 
-    <div class="form-horizontal">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <input type="text" id="myInput" name="clienteNome" class="btn btn-default" placeholder="Busca por nome do cliente">
-                </div>
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <input type="text" id="myInput" name="clienteNome" class="btn btn-default" placeholder="Busca por nome do cliente">
             </div>
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
-                </div>
+            <div class="btn-group" role="group">
+                @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
             </div>
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    @Html.DropDownList("Grupo_id", new SelectList(ViewBag.ddlGrupo, "Grupo_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
-                </div>
-            </div>
-          
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <input type="text" id="myInput" name="CPF" placeholder="Digite o CPF">
-                </div>
-            </div>
-            @*<div class="col-md-4">
-                <div class="form-group label-floating">
-                    @Html.DropDownList("Status_Atendimento_id", new SelectList(ViewBag.ddlStatusAtendimento, "Status_Atendimento_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
-                </div>
-            </div>*@
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <input type="text" id="myInput" name="CPF" placeholder="Cliente Contatado?">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group label-floating">
-                    <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
-                </div>
+            <div class="btn-group" role="group">
+                @Html.DropDownList("Grupo_id", new SelectList(ViewBag.ddlGrupo, "Grupo_id", "Nome"), new { @class = "btn btn-default dropdown-toggle" })
             </div>
         </div>
-    </div>
-    
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <input type="text" id="myInput" name="CPF" placeholder="Digite o CPF">
+            </div>
+            <div class="btn-group" role="group">
+                <input type="text" id="myInput" name="CPF" placeholder="Cliente Contatado?">
+            </div>
+            <div class="btn-group" role="group">
+                <input type="text" id="myInput" name="cotaNome" placeholder="Digite a cota">
+            </div>
+        </div>
+
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <input type="text" id="vencimentoCliente" name="vencimentoCliente" placeholder="Vencimento">
+            </div>
+        </div>
+
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
                 <input type="submit" value="Buscar" />
@@ -98,14 +86,7 @@
 
                 <tr>
                     <td>
-                        @if (cliente.Status_Atendimento_Id != 0)
-                        {
-                            <i class="material-icons md-36" style="color:@cliente.Status_Atendimento.cor">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:" + cliente.Status_Atendimento.cor + "" })</i>
-                        }
-                        else
-                        {
-                            <i class="material-icons md-36">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @class = "hasntContato" })</i>
-                        }
+                       <i class="material-icons md-36" style="color:@cliente.CorStatusPagamento">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:" + cliente.CorStatusPagamento + "" })</i>
                     </td>
                     <td>
                         @Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })
@@ -133,10 +114,10 @@
                                 ...
                             </button>
                             <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ocorrencia", "Create", "Atendimento", new { id = cliente.ClienteId }, null)</li>
                                 <li>@Html.ActionLink("Editar Registro", "Edit", new { id = cliente.ClienteId })</li>
                                 <li>@Html.ActionLink("Excluir Cliente", "Delete", new { id = cliente.ClienteId })</li>
                                 <li>@Html.ActionLink("Baixa de Pagamento", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</li>
-                                @*<li>@Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = cliente.ClienteId })</li>*@
                                 <li role="separator" class="divider"></li>
                                 <li>@Html.ActionLink("Cancelar Cliente", "CancelarCliente", new { id = cliente.ClienteId })</li>
 

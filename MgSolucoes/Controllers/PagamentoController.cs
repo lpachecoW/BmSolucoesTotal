@@ -160,6 +160,7 @@ namespace MgSolucoes.Controllers
                 pagamento.Clienteid = cliente.ClienteId;
 
                 pagamento.Grupo_id = cliente.Grupo_id;
+                pagamento.Representacao_id = cliente.Representacao_id;
 
                 if (i == 0)
                 {

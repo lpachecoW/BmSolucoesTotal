@@ -26,5 +26,8 @@ namespace MgSolucoes.Models
 
         public int Grupo_id { get; set; }
         public virtual Grupos Grupos { get; set; }
+
+        public int Representacao_id { get; set; }
+        public virtual Representacao Representacao { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace MgSolucoes.Models
         public int HasAtendimento { get; set; }
         public int? Cancelado { get; set; }
         public int? DiasEmAtraso { get; set; }
+        public string CorStatusPagamento { get; set; }
         //Dropdowns
         public int Representacao_id { get; set; }
         public virtual Representacao Representacoes { get; set; }
@@ -37,10 +38,15 @@ namespace MgSolucoes.Models
         public virtual Tipo_Bem Tipo_Bem { get; set; }
         public int Grupo_id { get; set; }
         public virtual Grupos Grupos { get; set; }
-        public int Cliente_Atendimento_Id{ get; set; }
+        public int Cliente_Atendimento_Id { get; set; }
         public virtual Cliente_Atendimento Cliente_Atendimento { get; set; }
         public int Status_Atendimento_Id { get; set; }
         public virtual Status_Atendimento Status_Atendimento { get; set; }
+    
+
+        public int Status_Pagamento_Id {get;set;}
+
+    
 
         
         public Pagamento pagamentos;

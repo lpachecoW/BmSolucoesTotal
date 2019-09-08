@@ -237,17 +237,84 @@ namespace MgSolucoes.Controllers
                     break;
             }
 
+            
 
-            
-            
             foreach (var addAtraso in clientes)
             {
-                var hh = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId).Count();
-                if (hh > 0) {
-                    var jj = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento== "NÃO PAGO").FirstOrDefault();
-                    addAtraso.DiasEmAtraso = Convert.ToInt32((addAtraso.Grupos.Dt_Vencimento - jj.Dt_Vencimento).TotalDays);
+                var parcela_um_paga = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Parcela_num == 1 && x.Status_Pagamento == "NÃO PAGO").Count();
+                var parcela_cliente_emDia = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento == "NÃO PAGO").Count();
+                var parcela_vencida_venc_grupo = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Status_Pagamento == "NÃO PAGO" && x.Dt_Vencimento.Month > addAtraso.Grupos.Dt_Vencimento.Month).Count();
+                var ultimas_parcelas_pagas = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Status_Pagamento == "PAGO" && x.Parcela_num == 5).Count();
+                var in_pag_clientes = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId).Count();
+
+                if (addAtraso.Cancelado == 1) {
+                    addAtraso.DiasEmAtraso = 0;
+                    addAtraso.Status_Pagamento_Id = 11;
+                    addAtraso.CorStatusPagamento = "#788283";
+                    continue;
                 }
-                
+
+                if (parcela_um_paga > 0) {
+                    var dadosByClienteId = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento == "NÃO PAGO").FirstOrDefault();
+                    if (dadosByClienteId == null)
+                    {
+                        addAtraso.DiasEmAtraso = 0;
+                    }
+                    else {
+                        addAtraso.DiasEmAtraso = Convert.ToInt32((addAtraso.Grupos.Dt_Vencimento - dadosByClienteId.Dt_Vencimento).TotalDays);
+                    }
+                    addAtraso.CorStatusPagamento = "#ffff00";
+                    addAtraso.Status_Pagamento_Id = 13;
+                    continue;
+                }
+
+                if (parcela_cliente_emDia > 0) {
+                    var dadosByClienteId = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento == "NÃO PAGO").FirstOrDefault();
+                    if (dadosByClienteId == null)
+                    {
+                        addAtraso.DiasEmAtraso = 0;
+                    }
+                    else
+                    {
+                        addAtraso.DiasEmAtraso = Convert.ToInt32((addAtraso.Grupos.Dt_Vencimento - dadosByClienteId.Dt_Vencimento).TotalDays);
+                    }
+                    addAtraso.CorStatusPagamento = "#5FE141";
+                    addAtraso.Status_Pagamento_Id = 8;
+                    continue;
+                }
+
+                if (parcela_vencida_venc_grupo > 0)
+                {
+                    var dadosByClienteId = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento == "NÃO PAGO").FirstOrDefault();
+                    if (dadosByClienteId == null)
+                    {
+                        addAtraso.DiasEmAtraso = 0;
+                    }
+                    else
+                    {
+                        addAtraso.DiasEmAtraso = Convert.ToInt32((addAtraso.Grupos.Dt_Vencimento - dadosByClienteId.Dt_Vencimento).TotalDays);
+                    }
+                    addAtraso.CorStatusPagamento = "#F50606";
+                    addAtraso.Status_Pagamento_Id = 9;
+                    continue;
+                }
+
+                if (ultimas_parcelas_pagas > 0)
+                {
+                    var dadosByClienteId = pagamentos.Where(x => x.Clienteid == addAtraso.ClienteId && x.Dt_Vencimento.Month == DateTime.Today.Month && x.Status_Pagamento == "NÃO PAGO").FirstOrDefault();
+                    if (dadosByClienteId == null)
+                    {
+                        addAtraso.DiasEmAtraso = 0;
+                    }
+                    else
+                    {
+                        addAtraso.DiasEmAtraso = Convert.ToInt32((addAtraso.Grupos.Dt_Vencimento - dadosByClienteId.Dt_Vencimento).TotalDays);
+                    }
+                    addAtraso.CorStatusPagamento = "#2B06F5";
+                    addAtraso.Status_Pagamento_Id = 10;
+                    continue;
+                }
+
             }
             
 
@@ -295,9 +362,10 @@ namespace MgSolucoes.Controllers
                 cliente.Dt_Cadastro = DateTime.UtcNow;
                 cliente.HasAtendimento = 0;
                 cliente.Cliente_Atendimento_Id = 0;
-                cliente.Status_Atendimento_Id = 2;
+                cliente.Status_Atendimento_Id = 13;
                 cliente.Cancelado = 0;
-                
+                cliente.Status_Pagamento_Id = 12;
+                cliente.CorStatusPagamento = "";
                 try
                 {   
                     db.Clientes.Add(cliente);
