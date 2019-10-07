@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,7 +29,7 @@ namespace MgSolucoes.Controllers
             int day = DateTime.Now.Day;
             var ClienteAniversario = db.Clientes.Where(x => x.Dt_nascimento.Day == day && x.Dt_nascimento.Month == month ).Count();
 
-            var AtendimentosDiarios = db.Atendimentos.Where(x=>x.Dt_Atendimento.Date == DateTime.Today).Count();
+            var AtendimentosDiarios = db.Atendimentos.Where(x => DbFunctions.TruncateTime(x.Dt_Atendimento) == DateTime.Today).Count();
             var ClientesSemComunicacao = db.Clientes.Where(x => x.Email.Equals("bm@bmc.om.br") || x.Tel_Fixo.Equals("(00)0000-0000") || x.Tel_Movel.Equals("(00)0000-0000")).Count();
 
             ViewBag.AtendimentoDiario = AtendimentosDiarios;

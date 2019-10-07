@@ -30,6 +30,7 @@ namespace MgSolucoes.Models
         public int HasAtendimento { get; set; }
         public int? Cancelado { get; set; }
         public int? DiasEmAtraso { get; set; }
+        public int? pagamentoGerado { get; set; }
         public string CorStatusPagamento { get; set; }
         //Dropdowns
         public int Representacao_id { get; set; }

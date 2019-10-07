@@ -223,6 +223,7 @@ namespace MgSolucoes.Controllers
                 pagamento.Parcela_num = i+1;
 
                 db.Pagamentos.Add(pagamento);
+                cliente.pagamentoGerado = 1;
                 db.SaveChanges();
             }
 

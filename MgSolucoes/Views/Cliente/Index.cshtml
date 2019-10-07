@@ -117,7 +117,18 @@
                                 <li>@Html.ActionLink("Ocorrencia", "Create", "Atendimento", new { id = cliente.ClienteId }, null)</li>
                                 <li>@Html.ActionLink("Editar Registro", "Edit", new { id = cliente.ClienteId })</li>
                                 <li>@Html.ActionLink("Excluir Cliente", "Delete", new { id = cliente.ClienteId })</li>
-                                <li>@Html.ActionLink("Baixa de Pagamento", "Create", "Pagamento", new { id = cliente.ClienteId }, null)</li>
+                                @if (cliente.pagamentoGerado == 0)
+                                {
+                                    <i onclick="atualizaPagamento(@cliente.ClienteId)">
+                                        <a href="#">Gerar Pagamento</a>
+                                    </i>
+
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Parcelas", "ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId }, null)</li>
+                                }
+
                                 <li role="separator" class="divider"></li>
                                 <li>@Html.ActionLink("Cancelar Cliente", "CancelarCliente", new { id = cliente.ClienteId })</li>
 
@@ -136,3 +147,29 @@
         @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
       
+
+        <script>
+
+            function atualizaPagamento(idPayment) {
+
+                $(function () {
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        url: "/Cliente/GerarParcelasPagamento",
+                        data: { clienteId: idPayment },
+                        success: function (dados) {
+                            if (dados.Sucess) {
+                                if (window.confirm("Você será redirecionado a baixa de parcelas.")) {
+                                    window.location = '/Pagamento/ContasAReceberPorCliente/' + idPayment;
+                                }
+                                
+                            }
+                        }
+                    });
+                });
+
+            }
+
+
+        </script>

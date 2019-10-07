@@ -17,6 +17,7 @@ namespace MgSolucoes.Controllers
         ConexaoDbContext dbPag;
 
 
+
         public ClienteController() {
             db = new ConexaoDbContext();
             dbPag = new ConexaoDbContext();
@@ -366,6 +367,7 @@ namespace MgSolucoes.Controllers
                 cliente.Cancelado = 0;
                 cliente.Status_Pagamento_Id = 12;
                 cliente.CorStatusPagamento = "";
+                cliente.pagamentoGerado = 0;
                 try
                 {   
                     db.Clientes.Add(cliente);
@@ -565,8 +567,53 @@ namespace MgSolucoes.Controllers
             return View(clientes.ToPagedList(pageNumber, pageSize));
         }
 
-       
+        public ActionResult GerarParcelasPagamento(int clienteId)
+        {
 
+            Cliente cliente = db.Clientes.Find(clienteId);
+            Grupos grupo = db.Grupos.Find(cliente.Grupo_id);
+
+
+            
+            int parcelas = cliente.Grupos.Nu_parcelas;
+            var pagamento = new Pagamento();
+            var olddate = DateTime.Now;
+
+            DateTime? isVencimento = null;
+            
+
+            isVencimento = grupo.Dt_Vencimento;
+        
+            for (var i = 0; i < parcelas; i++)
+            {   
+                pagamento.Clienteid = cliente.ClienteId;
+
+                pagamento.Grupo_id = cliente.Grupo_id;
+                pagamento.Representacao_id = cliente.Representacao_id;
+
+                pagamento.Status_Pagamento = "NÃO PAGO";
+               
+                if (i >= 0)
+                {
+                    var tempDate = isVencimento.Value.AddMonths(i);
+                    var newDate = new DateTime(tempDate.Year, tempDate.Month, tempDate.Day); //create 
+                    pagamento.Dt_Vencimento = newDate;
+                }
+                
+                pagamento.Parcela_num = i + 1;
+
+                db.Pagamentos.Add(pagamento);
+                db.Clientes.SqlQuery("update cliente set pagamentoGerado = 1 where ClienteId = " + clienteId);
+                db.SaveChanges();
+
+            }
+
+            var resultado = new
+            {
+                Sucess = true
+            };
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
 
         Boolean AddPagamentosPorContrato(string cliente, int contrato) {
             bool enviaBanco = false;

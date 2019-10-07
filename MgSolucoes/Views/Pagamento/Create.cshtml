@@ -5,9 +5,6 @@
 
 <h2>Adicionar Pagamento</h2>
 
-@ViewBag.Grupos
-@ViewBag.Cliente
-
 @using (Html.BeginForm("Create", "Pagamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
