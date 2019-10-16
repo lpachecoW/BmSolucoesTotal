@@ -208,6 +208,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ComissaoController.cs" />
     <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GruposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -674,6 +675,7 @@
     <Content Include="Views\Relatorios\Index.cshtml" />
     <Content Include="Views\Cliente\CancelarCliente.cshtml" />
     <Content Include="Views\Pagamento\RelatoriosBm.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
