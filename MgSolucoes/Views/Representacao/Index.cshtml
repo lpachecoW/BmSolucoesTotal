@@ -10,25 +10,36 @@
 
 <table class="table">
     <tr>
-        <th>CPF/CNPJ</th>
-        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>REPRESENTACAO</th>
         <th></th>
         <th></th>
-      </tr>
+        <th></th>
+    </tr>
 
     @foreach (var representacao in Model)
     {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => representacao.Cpf)</td>
-        <td>@Html.ActionLink(representacao.Nome, "Edit", new { id = representacao.Representacao_id })</td>
-        <td><i class="material-icons md-36">@Html.ActionLink("edit", "Edit", new { id = representacao.Representacao_id })</i></td>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => representacao.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => representacao.Dt_nascimento)</td>
+            <td>@Html.DisplayFor(modelItem => representacao.Cpf)</td>
+            <td>@Html.DisplayFor(modelItem => representacao.Funcao)</td>
+            
 
-        @*<td>
-            @Html.ActionLink("Editar", "Edit", new { id = representacao.Representacao_id }) |
-            @Html.ActionLink("Detalhes", "Details", new { id = representacao.Representacao_id }) |
-            @Html.ActionLink("Deletar", "Delete", new { id = representacao.Representacao_id })
-        </td>*@
-    </tr>
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">Ver+</button>
+                    <div class="dropdown-content">
+                        @Html.ActionLink("Editar", "Edit", new { id = representacao.Representacao_id })
+                        @Html.ActionLink("Detalhes", "Details", new { id = representacao.Representacao_id })
+                        @Html.ActionLink("Deletar", "Delete", new { id = representacao.Representacao_id })
+                    </div>
+                </div>
+
+            </td>
+
+        </tr>
+
+       
 
     }
 </table>

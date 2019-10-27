@@ -22,10 +22,10 @@
     </a>
     <div id="collapseAdministrativo" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="register.html">Cadastrar novo usuario</a>
-            <a class="collapse-item" href="ocorrencias.html">Tela de ocorrencias</a>
-            <a class="collapse-item" href="pagamento.html">Baixa de pagamento</a>
-            <a class="collapse-item" href="telaDeRelatorios.html">Tela de relatorios</a>
+            <a class="collapse-item" href="@Url.Action("Create", "Cliente")">Cadastrar novo usuario</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Atendimento")">Tela de ocorrencias</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Pagamento")">Baixa de pagamento</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Relatorios")">Tela de relatorios</a>
         </div>
     </div>
 </li>
@@ -38,15 +38,15 @@
     </a>
     <div id="collapseCadastros" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="grupos.html">Grupos</a>
-            <a class="collapse-item" href="representacao.html">Representacao</a>
-
+            <a class="collapse-item" href="@Url.Action("Index", "Grupos")">Grupos</a>
+            <a class="collapse-item" href="@Url.Action("Index", "Representacao")">Representacao</a>
+            
         </div>
     </div>
 </li>
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-    <a class="nav-link" href="charts.html">
+    <a class="nav-link" href="@Url.Action("Index", "Dashboard")">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Dashboard</span>
     </a>
@@ -54,7 +54,7 @@
 
 <!-- Nav Item - Tables -->
 <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="@Url.Action("Index", "Cliente")">
         <i class="fas fa-fw fa-table"></i>
         <span>Clientes</span>
     </a>

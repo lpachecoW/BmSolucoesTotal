@@ -9,99 +9,78 @@
 @using (Html.BeginForm("Create", "Atendimento", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <div class="card-content">
-            <div class="row">
 
-                <div class="col-md-4">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Status Atendimento</label>
-                        @Html.DropDownListFor(m => m.Status_Atendimento_id,
-                                           new SelectList(ViewBag.Atendimento, "Status_Atendimento_id", "Nome"),
-                                           "Status deste atendimento", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Status_Atendimento_id, "", new { @class = "text-danger" })
-                    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inputState">Cliente</label><span class="badge badge-light">Cliente BM de testes</span>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputState">Representacao</label><span class="badge badge-light">JC interdicao de negocios</span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="inputState">Tipo de atendimento</label>
+            @Html.DropDownListFor(m => m.Status_Atendimento_id,
+                                          new SelectList(ViewBag.Atendimento, "Status_Atendimento_id", "Nome"),
+                                          "Status deste atendimento", new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputState">Boleto enviado</label>
+            @Html.DropDownListFor(m => m.Status_Pagamento_id,
+                                          new SelectList(ViewBag.Pagamento, "Status_Pagamento_id", "Nome"),
+                                          "Boleto Enviado?", new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputState">Lance ofertado?</label>
+            @Html.DropDownListFor(m => m.Status_Lance_id,
+                                          new SelectList(ViewBag.Lance, "Status_lance_id", "Nome"),
+                                          "Lance ofertado?", new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputState">Reclamacoes</label>
+            <label class="control-label">Reclamações?</label>
+            <select class="form-control" data-val="true" data-val-required="O campo Lance Foi Ofertado? é obrigatório." id="Procon" name="Procon">
+                <option value="2">Procon</option>
+                <option value="1">Pequenas causas</option>
+                <option value="0">Reclame aqui</option>
+                <option value="2">Nenhuma ação</option>
+            </select>
+        </div>
+    </div>
 
-                </div>
+    <div class="form-row">
 
+        <a class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">
+                <input type="submit" value="Adicionar Ocorrencia" class="btn btn-success" />
+            </span>
+            <span class="text">
+                @Html.ActionLink("Cancelar", "Inicio", null, new { @class = "btn btn-danger" })
+                </span>
 
-                <div class="col-md-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Status Pagamento</label>
-                        @Html.DropDownListFor(m => m.Status_Pagamento_id,
-                                           new SelectList(ViewBag.Pagamento, "Status_Pagamento_id", "Nome"),
-                                           "Boleto Enviado?", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Status_Pagamento_id, "", new { @class = "text-danger" })
+        </a>
 
-                    </div>
-
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Lance ofertado?</label>
-                        @Html.DropDownListFor(m => m.Status_Lance_id,
-                                           new SelectList(ViewBag.Lance, "Status_lance_id", "Nome"),
-                                           "Lance ofertado?", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Status_Pagamento_id, "", new { @class = "text-danger" })
-
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Contato?</label>
-                        <select class="form-control" data-val="true" data-val-required="O campo Lance Foi Ofertado? é obrigatório." id="Contatado" name="Contatado">
-                            <option value="">Contato?</option>
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
-                        </select>
-
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Reclamações?</label>
-                        <select class="form-control" data-val="true" data-val-required="O campo Lance Foi Ofertado? é obrigatório." id="Procon" name="Procon">
-                            <option value="2">Procon</option>
-                            <option value="1">Pequenas causas</option>
-                            <option value="0">Reclame aqui</option>
-                            <option value="2">Nenhuma ação</option>
-                        </select>
-
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Relato</label>
-                        <label for="exampleFormControlTextarea3">Relato</label>
-                        <textarea class="form-control" id="Texto" name="Texto" rows="7"></textarea>
-
-                    </div>
+    </div>
+    <br>
+    <div>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descrição do atnedimento</label>
+                    <textarea class="form-control" name="Texto" id="Texto" rows="7"></textarea>
                 </div>
             </div>
+
         </div>
+
+
     </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Adicionar Ocorrencia" class="btn btn-success" />
-            @Html.ActionLink("Cancelar", "Inicio", null, new { @class = "btn btn-danger" })
-        </div>
-    </div>
-
-
-
-
-
+ 
 }
 <div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        $('#Dt_Cadastro').val(Date)
-        $('#Dt_Nascimento').val(Date)
 
-    </script>
-}

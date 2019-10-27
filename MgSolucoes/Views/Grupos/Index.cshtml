@@ -7,8 +7,15 @@
 
 <h2>Grupos</h2>
 
+<a href="@Url.Action("Create", "Grupos")" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-arrow-right"></i>
+    </span>
+    <span class="text">Incluir novo grupo</span>
+</a>
+
 <p>
-    @Html.ActionLink("Incluir novo Grupo", "Create", "Grupos", new { @class = "btn btn-sucess" })
+   
 </p>
 
 <table class="table">
@@ -22,27 +29,27 @@
 
     @foreach (var grupos in Model)
     {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => grupos.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => grupos.Dt_Cadastro)</td>
-        <td>@Html.DisplayFor(modelItem => grupos.Dt_Vencimento)</td>
-        <td>@Html.DisplayFor(modelItem => grupos.Nu_parcelas)</td>
-        <td>@Html.DisplayFor(modelItem => grupos.Tipo_adesao)</td>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => grupos.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => grupos.Dt_Cadastro)</td>
+            <td>@Html.DisplayFor(modelItem => grupos.Dt_Vencimento)</td>
+            <td>@Html.DisplayFor(modelItem => grupos.Nu_parcelas)</td>
+            <td>@Html.DisplayFor(modelItem => grupos.Tipo_adesao)</td>
 
-     
-        <td>
-            <div class="dropdown">
-                <button class="dropbtn">Ver+</button>
-                <div class="dropdown-content">
-                    @Html.ActionLink("Editar", "Edit", new { id = grupos.Grupo_id })
-                    @Html.ActionLink("Detalhes", "Details", new { id = grupos.Grupo_id })
-                    @Html.ActionLink("Deletar", "Delete", new { id = grupos.Grupo_id })
+
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">Ver+</button>
+                    <div class="dropdown-content">
+                        @Html.ActionLink("Editar", "Edit", new { id = grupos.Grupo_id })
+                        @Html.ActionLink("Detalhes", "Details", new { id = grupos.Grupo_id })
+                        @Html.ActionLink("Deletar", "Delete", new { id = grupos.Grupo_id })
+                    </div>
                 </div>
-            </div>
 
-        </td>
+            </td>
 
-    </tr>
+        </tr>
 
     }
 </table>
@@ -50,6 +57,6 @@
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 
