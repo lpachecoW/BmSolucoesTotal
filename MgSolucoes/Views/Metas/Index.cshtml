@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<MgSolucoes.Models.Metas>
+@using PagedList.Mvc;
+    
+}
+
+
+<p>
+    @Html.ActionLink("Incluir nova meta", "Create", "Metas", new { @class = "btn btn-sucess" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>Meta</th>
+        <th>Periodo de Inicio</th>
+        <th>Periodo Fim</th>
+        <th>Meta em milhoes</th>
+        <th>Meta diaria</th>
+    </tr>
+
+    @foreach (var metas in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => metas.Meta_Id)</td>
+        <td>@Html.DisplayFor(modelItem => metas.Inicio)</td>
+        <td>@Html.DisplayFor(modelItem => metas.Fim)</td>
+        <td>@Html.DisplayFor(modelItem => metas.MetaMensal)</td>
+        <td>@Html.DisplayFor(modelItem => metas.MetaDiaria)</td>
+
+
+
+        <td>
+            <div class="dropdown">
+                <button class="dropbtn">Ver+</button>
+                <div class="dropdown-content">
+                    @Html.ActionLink("Detalhes", "Details", new { id = metas.Meta_Id })
+                </div>
+            </div>
+
+        </td>
+
+    </tr>
+
+    }
+</table>
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+

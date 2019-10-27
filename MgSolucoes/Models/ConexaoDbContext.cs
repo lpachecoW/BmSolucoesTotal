@@ -21,5 +21,6 @@ namespace MgSolucoes.Models
         public DbSet<Status_Lance> Status_Lance { get; set; }
         public DbSet<Comissao> Comissoes{ get; set; }
         public DbSet<Cliente_Atendimento> Cliente_Atendimentos { get; set; }
+        public DbSet<Metas> Metas { get; set; }
     }
 }

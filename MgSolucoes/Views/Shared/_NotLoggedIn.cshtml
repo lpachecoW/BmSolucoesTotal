@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!-- Nav Item - Dashboard -->
+
+
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+
+<!-- Nav Item - Charts -->
+<li class="nav-item">
+    <a class="nav-link" href="charts.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Registrar</span>
+    </a>
+</li>
+
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+    @Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    
+</li>
+
+<!-- Divider -->
+<hr class="sidebar-divider d-none d-md-block">
+
+<!-- Sidebar Toggler (Sidebar) -->
+<div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+</div>
+
+
+
+
+
+@*<ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Logon", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>*@
+
+

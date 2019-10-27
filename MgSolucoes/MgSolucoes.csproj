@@ -212,6 +212,7 @@
     <Compile Include="Controllers\GruposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MetasController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
     <Compile Include="Controllers\RepresentacaoController.cs" />
@@ -239,6 +240,8 @@
     <Compile Include="Models\GruposViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metas.cs" />
+    <Compile Include="Models\MetaViewModel.cs" />
     <Compile Include="Models\Pagamento.cs" />
     <Compile Include="Models\PagamentoViewModel.cs" />
     <Compile Include="Models\RelatoriosViewModel.cs" />
@@ -676,6 +679,14 @@
     <Content Include="Views\Cliente\CancelarCliente.cshtml" />
     <Content Include="Views\Pagamento\RelatoriosBm.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Metas\Index.cshtml" />
+    <Content Include="Views\Metas\Create.cshtml" />
+    <Content Include="Views\Shared\_LoggedIn.cshtml" />
+    <Content Include="Views\Shared\_NotLoggedIn.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Perfil.cshtml" />
+    <Content Include="Views\Shared\_MenuLogado.cshtml" />
+    <Content Include="Views\Shared\_MenuDeslogado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

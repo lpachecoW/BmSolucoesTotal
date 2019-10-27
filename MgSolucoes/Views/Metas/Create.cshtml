@@ -1,0 +1,58 @@
+﻿@model MgSolucoes.Models.MetaViewModel
+@{
+    ViewBag.Title = "Adicionar Meta";
+}
+
+<h2>Nova meta</h2>
+<hr />
+
+@using (Html.BeginForm("Create", "Metas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Inicio, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Inicio,
+                                new { @class = "form-control", @placeholder = "Periodo Inicio" })
+                @Html.ValidationMessageFor(m => m.Inicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Fim, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Fim,
+                                new { @class = "form-control", @placeholder = "Periodo Fim" })
+                @Html.ValidationMessageFor(m => m.Fim, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MetaMensal, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.MetaMensal,
+                                new { @class = "form-control", @placeholder = "Meta para o periodo" })
+                @Html.ValidationMessageFor(m => m.MetaMensal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.MetaDiaria, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.MetaDiaria,
+                                new { @class = "form-control", @placeholder = "% diario" })
+                @Html.ValidationMessageFor(m => m.MetaDiaria, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Adicionar Meta" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+
+    </div>
+}
