@@ -1,12 +1,14 @@
 ﻿@model PagedList.IPagedList<MgSolucoes.Models.Metas>
 @using PagedList.Mvc;
     
-}
 
 
-<p>
-    @Html.ActionLink("Incluir nova meta", "Create", "Metas", new { @class = "btn btn-sucess" })
-</p>
+<a href="@Url.Action("Create", "Metas")" class="btn btn-primary btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-arrow-right"></i>
+    </span>
+    <span class="text">Incluir nova meta</span>
+</a>
 
 <table class="table">
     <tr>

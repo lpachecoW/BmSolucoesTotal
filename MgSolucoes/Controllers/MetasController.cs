@@ -64,7 +64,7 @@ namespace MgSolucoes.Controllers
             if (ModelState.IsValid)
             {
                 var meta = new Metas();
-                meta.MetaDiaria = model.MetaDiaria;
+                meta.MetaMensal = model.MetaMensal;
                 meta.Inicio = model.Inicio;
                 meta.Fim = model.Fim;
                 meta.MetaDiaria = model.MetaDiaria;

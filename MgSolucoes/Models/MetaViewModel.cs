@@ -20,7 +20,7 @@ namespace MgSolucoes.Models
         [Display(Name = "Data de cadsatro")]
         public DateTime? Fim { get; set; }
 
-        [Display(Name = "Data de vencimento")]
+        [Display(Name = "Meta diria")]
         public Int32 MetaDiaria { get; set; }
     }
 }
