@@ -30,6 +30,7 @@ namespace MgSolucoes.Models
 
         [Required(AllowEmptyStrings = true)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public int? Boleto_Enviado { get; set; }
 
         public int Status_Lance_id { get; set; }
         public virtual Status_Lance Lances { get; set; }

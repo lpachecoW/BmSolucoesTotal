@@ -112,7 +112,7 @@
         <th>Data do Relato</th>
         <th>Alteração</th>
         <th>Boleto Enviado</th>
-        <th>Lance</th>
+        @*<th>Lance</th>*@
         <th>Operador</th>
         <th>Comentario</th>
 
@@ -126,7 +126,7 @@
         <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</a></td>
         <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</a></td>
         <td><a href="#"></a></td>
-        <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>
+        @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>*@
         <td><a href="#">@string.Format("{0:C}", atendimento.Valor_ofertado)</a></td>
         @*<td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>*@
         @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendente_id)</a></td>*@

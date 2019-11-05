@@ -37,7 +37,7 @@ namespace MgSolucoes.Models
         public Int32 Status_Lance_id { get; set; }
 
         public Int32? Contatado { get; set; }
-
+        public Int32? Boleto_Enviado { get; set; }
         public Int32? Procon { get; set; }
 
         [Display(Name = "Valor Ofertado")]

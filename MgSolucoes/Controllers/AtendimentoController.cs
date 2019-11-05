@@ -102,8 +102,9 @@ namespace MgSolucoes.Controllers
                 Cliente cliente = db.Clientes.Find(id);
 
                 atendimento.Clienteid = id;
+                atendimento.Status_Pagamento_id = 0;
                 atendimento.Status_Atendimento_id = model.Status_Atendimento_id;
-                atendimento.Status_Pagamento_id = model.Status_Pagamento_id;
+                atendimento.Boleto_Enviado = model.Boleto_Enviado;
                 atendimento.Dt_Atendimento = DateTime.Now;
                 atendimento.Texto = model.Texto;
                 atendimento.Status_Lance_id = model.Status_Lance_id;

@@ -5,6 +5,8 @@
     ViewBag.Title = "Pagamento cliente";
 }
 
+<!-- Needed for material icons -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Roboto+Mono:400,500|Material+Icons" rel="stylesheet">
 <style>
     /* Rules for sizing the icon. */
     .material-icons.md-18 {
@@ -90,11 +92,11 @@
 
 <div>
     <p>Status:<span>@Model.Select(x => x.Clientes.Status_Atendimento.Nome).FirstOrDefault()</span></p>
-    
+
 </div>
 <div>
     <p>Representacao:<span>@Model.Select(x => x.Clientes.Representacoes.Nome).FirstOrDefault()</span></p>
-    
+
 </div>
 
 
@@ -108,8 +110,7 @@
         <th>Credito</th>
         <th>Vencimento</th>
         <th>Pagamento</th>
-        <th>Contemplado</th>
-        <th></th>
+        @*<th>Contemplado</th>*@
         <th>Status</th>
         <th></th>
     </tr>
@@ -125,10 +126,10 @@
             <td>@Html.DisplayFor(modelItem => pagamento.Clientes.Valor_Credito)</td>
             <td>@Html.DisplayFor(modelItem => pagamento.Dt_Vencimento)</td>
             <td>@Html.DisplayFor(modelItem => pagamento.Dt_Pagamento)</td>
-            <td>
+            @*<td>
                 <input type="radio" id="huey" name="drone" value="1" checked>
                 <label for="huey"></label>
-            </td>
+            </td>*@
             @if (pagamento.Status_Pagamento.Equals("PAGO"))
             {
 

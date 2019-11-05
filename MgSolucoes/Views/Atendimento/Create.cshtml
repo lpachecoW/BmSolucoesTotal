@@ -27,9 +27,10 @@
         </div>
         <div class="form-group col-md-2">
             <label for="inputState">Boleto enviado</label>
-            @Html.DropDownListFor(m => m.Status_Pagamento_id,
-                                          new SelectList(ViewBag.Pagamento, "Status_Pagamento_id", "Nome"),
-                                          "Boleto Enviado?", new { @class = "form-control" })
+            <select class="form-control" id="Boleto_Enviado" name="Boleto_Enviado">
+                <option value="1">Sim</option>
+                <option value="0">Não</option>
+            </select>
         </div>
         <div class="form-group col-md-2">
             <label for="inputState">Lance ofertado?</label>
@@ -38,13 +39,12 @@
                                           "Lance ofertado?", new { @class = "form-control" })
         </div>
         <div class="form-group col-md-2">
-            <label for="inputState">Reclamacoes</label>
-            <label class="control-label">Reclamações?</label>
+            <label for="inputState">Reclamacoes?</label>
             <select class="form-control" data-val="true" data-val-required="O campo Lance Foi Ofertado? é obrigatório." id="Procon" name="Procon">
-                <option value="2">Procon</option>
+                <option value="0">Procon</option>
                 <option value="1">Pequenas causas</option>
-                <option value="0">Reclame aqui</option>
-                <option value="2">Nenhuma ação</option>
+                <option value="2">Reclame aqui</option>
+                <option value="3">Nenhuma ação</option>
             </select>
         </div>
     </div>
@@ -60,7 +60,7 @@
             </span>
             <span class="text">
                 @Html.ActionLink("Cancelar", "Inicio", null, new { @class = "btn btn-danger" })
-                </span>
+            </span>
 
         </a>
 
@@ -79,7 +79,7 @@
 
 
     </div>
- 
+
 }
 <div>
 </div>

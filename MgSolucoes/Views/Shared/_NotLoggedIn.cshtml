@@ -1,24 +1,28 @@
 ﻿@using Microsoft.AspNet.Identity
 
 <!-- Nav Item - Dashboard -->
-
-
 <!-- Divider -->
 <hr class="sidebar-divider">
 
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-    <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Registrar</span>
+    <a class="nav-link" href="@Url.Action("Login", "Account")">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Entrar</span>
     </a>
 </li>
 
 <!-- Nav Item - Tables -->
 <li class="nav-item">
-    @Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
-    
+<li class="nav-item">
+    <a class="nav-link" href="@Url.Action("Register", "Account")">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Registre-se</span>
+    </a>
+</li>
+
+
 </li>
 
 <!-- Divider -->

@@ -117,10 +117,10 @@
                         @foreach (var cliente in Model)
                         {
                             <tr>
-                                @*<td>
+                                <td>
                                         <i class="material-icons md-36" style="color:@cliente.CorStatusPagamento">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:" + cliente.CorStatusPagamento + "" })</i>
-                                    </td>*@
-                                <td><a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-laugh-wink"></i></a></td>
+                                    </td>
+                                
                                 <td>@Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })</td>
                                 <td>@Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)</td>
                                 <td id="Tel_Fixo">

@@ -489,7 +489,7 @@ namespace MgSolucoes.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClienteId,Nome,Cpf,Nu_conta_ade,Tel_Movel,Tel_Fixo,Email,Valor_Credito,Dt_nascimento,Vendedor, Grupo_id,Representacao_id,TipoBemId")] Cliente model)
+        public ActionResult Edit([Bind(Include = "ClienteId,Nome,Cpf,Nu_conta_ade,Tel_Movel,Tel_Fixo,Email,Valor_Credito,Dt_nascimento,Vendedor, Grupo_id,Representacao_id,TipoBemId,Cota_id")] Cliente model)
         {
             
                 var cliente = db.Clientes.Find(model.ClienteId);
@@ -509,6 +509,7 @@ namespace MgSolucoes.Controllers
                 cliente.Grupo_id = model.Grupo_id;
                 cliente.Representacao_id = model.Representacao_id;
                 cliente.TipoBemId = model.TipoBemId;
+                cliente.Cota_id = model.Cota_id;
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
