@@ -415,7 +415,9 @@ namespace MgSolucoes.Controllers
             ViewBag.Grupos = db.Grupos.Find(cliente.Grupo_id).Nome;
             ViewBag.Representacao = db.Representacoes.Find(cliente.Representacao_id).Nome;
             ViewBag.ClienteId = cliente.ClienteId;
-            
+            ViewBag.TemPagamento = cliente.pagamentoGerado;
+
+
             return View(cliente);
         }
 
@@ -463,7 +465,8 @@ namespace MgSolucoes.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Cliente cliente = db.Clientes.Find(id);
-            db.Clientes.Remove(cliente);
+            cliente.Cancelado = 1;
+            cliente.CorStatusPagamento = "#696969";
             db.SaveChanges();
             return RedirectToAction("Index");
         }

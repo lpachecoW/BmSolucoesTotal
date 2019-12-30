@@ -4,6 +4,36 @@
 }
 <h2>Detalhes do cliente</h2>
 <hr />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #myProgress {
+        width: 100%;
+        background-color: #ddd;
+        display: none;
+    }
+
+    #myBar {
+        width: 10%;
+        height: 30px;
+        background-color: #4CAF50;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+    }
+
+
+    /* Style buttons */
+    .buttonload {
+        background-color: #4e73df; /* Green background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px /* Set a font size */
+    }
+</style>
 <div>
     <div class="form-horizontal">
 
@@ -65,7 +95,7 @@
                     <div class="col-md-4">
                         <div class="form-group label-floating">
                             <label class="control-label">Valor do credito</label>
-                            @Html.TextBoxFor(m => m.Valor_Credito,     new { @class = "form-control", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.Valor_Credito, new { @class = "form-control", @disabled = "disabled" })
                         </div>
                     </div>
                 </div>
@@ -135,7 +165,22 @@
                 </div>
 
 
-                @*@Html.ActionLink("Retornar", "Index", null, new { @class = "btn btn-primary pull-left" })*@
+                <p>@ViewBag.TemPagamento</p>
+                @if (ViewBag.TemPagamento == 0)
+                {
+                    <a class="btn btn-primary pull-left" id="btn_pagamento" onclick="atualizaPagamento(@ViewBag.ClienteId)" href="#">Gerar Pagamento</a>
+                    <button class="buttonload" style="display:none;">
+                        <i class="fa fa-spinner fa-spin"></i>Processando
+                    </button>
+                }
+
+
+
+
+
+
+
+
 
                 @Html.ActionLink(
                 "Retornar",
@@ -171,3 +216,35 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    var i = 0;
+    $("#btn_pagamento").click(function () {
+        $("#btn_pagamento").hide();
+        $(".buttonload").show();
+    });
+    function atualizaPagamento(idPayment) {
+
+        $(function () {
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                url: "/Cliente/GerarParcelasPagamento",
+                data: { clienteId: idPayment },
+                success: function (dados) {
+                    if (dados.Sucess) {
+                        $(".buttonload").hide();
+                        if (window.confirm("Você será redirecionado a baixa de parcelas.")) {
+                            window.location = '/Pagamento/ContasAReceberPorCliente/' + idPayment;
+                        }
+
+                    }
+                }
+            });
+        });
+
+    }
+
+
+</script>

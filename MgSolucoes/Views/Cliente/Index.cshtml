@@ -32,7 +32,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputEmail4">CPF</label>
-                <input type="email" class="form-control" id="myInput" name="CPF" placeholder="CPF cliente">
+                <input type="text" class="form-control" id="myInput" name="CPF" placeholder="CPF cliente">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputEmail4">Status</label>
@@ -46,12 +46,12 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputPassword4">Data de vencimento</label>
-                <input type="date" class="form-control" id="vencimentoCliente" name="vencimentoCliente" placeholder="Vencimento">
+                <input type="text" class="form-control" id="vencimentoCliente" name="vencimentoCliente" placeholder="Vencimento">
             </div>
-            <div class="form-group col-md-3">
+            @*<div class="form-group col-md-3">
                 <label for="inputPassword4">Contatado</label>
                 <input type="text" class="form-control" id="inputPassword4" placeholder="Cliente foi contatado?">
-            </div>
+            </div>*@
         </div>
 
         <div class="form-row">
@@ -140,17 +140,18 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <a class="dropdown-item" href="@Url.Action("Create", "Atendimento", new { id = cliente.ClienteId })">Ocorrencia</a>
+                                                <a class="dropdown-item" href="@Url.Action("ListaAtendimentosByClienteId", "Atendimento", new { id = cliente.ClienteId })">Historico de atendimento</a>
                                                 <a class="dropdown-item" href="@Url.Action("Edit", "Cliente", new { id = cliente.ClienteId })">Editar Registro</a>
-                                                <a class="dropdown-item" href="@Url.Action("Delete", "Cliente", new { id = cliente.ClienteId })">Excluir Cliente</a>
+                                                <a class="dropdown-item" href="@Url.Action("Delete", "Cliente", new { id = cliente.ClienteId })">Cancelar Cliente</a>
 
-                                                @if (cliente.pagamentoGerado == 0)
-                                                {
-                                                    <a class="dropdown-item" onclick="atualizaPagamento(@cliente.ClienteId)" href="#">Gerar Pagamento</a>
-                                                }
-                                                else
-                                                {
-                                                    <a class="dropdown-item" href="@Url.Action("ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId })">Parcelas</a>
-                                                }
+                                                @*@if (cliente.pagamentoGerado == 0)
+        {
+            <a class="dropdown-item" onclick="atualizaPagamento(@cliente.ClienteId)" href="#">Gerar Pagamento</a>
+        }
+        else
+        {
+            <a class="dropdown-item" href="@Url.Action("ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId })">Parcelas</a>
+        }*@
 
                                             </div>
                                         </div>
@@ -197,17 +198,7 @@
 </div>
                   </div>
 
-<table class="table">
-    <tr></tr>
 
-    @foreach (var cliente in Model)
-    {
-
-        <tr></tr>
-    }
-
-</table>
-<br />
 
 <script>
 
