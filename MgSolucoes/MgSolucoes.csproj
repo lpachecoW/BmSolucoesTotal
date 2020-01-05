@@ -688,6 +688,7 @@
     <Content Include="Views\Shared\_Perfil.cshtml" />
     <Content Include="Views\Shared\_MenuLogado.cshtml" />
     <Content Include="Views\Shared\_MenuDeslogado.cshtml" />
+    <Content Include="Views\Cliente\Pesquisa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

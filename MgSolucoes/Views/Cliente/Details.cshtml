@@ -164,8 +164,7 @@
 
                 </div>
 
-
-                <p>@ViewBag.TemPagamento</p>
+                
                 @if (ViewBag.TemPagamento == 0)
                 {
                     <a class="btn btn-primary pull-left" id="btn_pagamento" onclick="atualizaPagamento(@ViewBag.ClienteId)" href="#">Gerar Pagamento</a>
@@ -173,12 +172,6 @@
                         <i class="fa fa-spinner fa-spin"></i>Processando
                     </button>
                 }
-
-
-
-
-
-
 
 
 
@@ -219,6 +212,20 @@
 
 
 <script>
+
+     $("#Valor_Credito").inputmask('currency', {
+            autoUnmask: true,
+            radixPoint: ",",
+            groupSeparator: ".",
+            allowMinus: false,
+            prefix: 'R$ ',
+            digits: 2,
+            digitsOptional: false,
+            rightAlign: false,
+            unmaskAsNumber: true
+        });
+
+
     var i = 0;
     $("#btn_pagamento").click(function () {
         $("#btn_pagamento").hide();

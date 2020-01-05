@@ -10,6 +10,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/inputmask")
+    @RenderSection("scripts", required: false)
 
     <link href="~/Content/Dashboard/css/sb-admin-2.min.css" rel="stylesheet" />
 
@@ -68,7 +70,7 @@
 
                         @Html.Partial("_Perfil")
 
-</nav>
+                </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -85,38 +87,36 @@
         <!-- End of Content Wrapper -->
     </div>
 
-        <div class="container body-content">
-            
-            <hr />
-            @Html.Partial("_Footer")
-        </div>
+    <div class="container body-content">
 
-        <!-- Bootstrap core JavaScript-->
+        <hr />
+        @Html.Partial("_Footer")
+    </div>
 
-        
-        <script src="~/Content/Dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="~/Content/Dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="~/Content/Dashboard/js/sb-admin-2.min.js"></script>
-
-        <!-- Page level plugins -->
-        <script src="~/Content/Dashboard/vendor/chart.js/Chart.min.js"></script>
-
-        <!-- Page level custom scripts -->
-        <script src="~/Content/Dashboard/js/demo/chart-area-demo.js"></script>
-        <script src="~/Content/Dashboard/js/demo/chart-pie-demo.js"></script>
+    <!-- Bootstrap core JavaScript-->
 
 
+    <script src="~/Content/Dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/Dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/Dashboard/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Content/Dashboard/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/Dashboard/js/demo/chart-area-demo.js"></script>
+    <script src="~/Content/Dashboard/js/demo/chart-pie-demo.js"></script>
 
 
-        @*@Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/jqueryval")
-            @Scripts.Render("~/bundles/inputmask")
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/inputmask")
 
-            @RenderSection("scripts", required: false)
-            <script type="text/javascript" src="~/Scripts/Geral.js"></script>*@
+        @RenderSection("scripts", required: false)
+        <script type="text/javascript" src="~/Scripts/Geral.js"></script>*@
 </body>
 </html>

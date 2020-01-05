@@ -60,7 +60,7 @@
         }
 
     tr:hover {
-        background:#0094ff;
+        background: #0094ff;
     }
 
     #tst {
@@ -72,31 +72,32 @@
             text-align: center;
         }
 
-        .btn-tst {
-            position: absolute;
-            right: 10px;
-            top: 5px;
-        }
-    
+    .btn-tst {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
 </style>
 <br />
 
+ 
+         
 <div>
     <div class="btn-group" role="group" aria-label="...">
-        <a class="btn btn-default">Cliente: @Model.Select(x => x.Clientes.Nome).FirstOrDefault()</a>
+        <a class="btn btn-default">Cliente: @ViewBag.ClienteNome</a>
         <a class="btn btn-default">Situação: ATIVO</a>
     </div>
     <br />
     <div class="btn-group" role="group" aria-label="...">
-        <a class="btn btn-default">Grupo/Cota: @Model.Select(x => x.Clientes.Grupos.Nome).FirstOrDefault()/@Model.Select(x => x.Clientes.Cota_id).FirstOrDefault()</a>
+        <a class="btn btn-default">Grupo/Cota: @ViewBag.Grupo/@ViewBag.Cota</a>
     </div>
     <div class="btn-group" role="group" aria-label="...">
-        <a class="btn btn-default">Representacao: @Model.Select(x => x.Clientes.Representacoes.Nome).FirstOrDefault()</a>
+        <a class="btn btn-default">Representacao: @ViewBag.Representacao</a>
     </div>
 
 
     <div id="tst">
-        @Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = Model.Select(x => x.Clientes.ClienteId).FirstOrDefault() }, new { @class = "btn btn-primary pull-left btn-tst", @style = "" })
+        @Html.ActionLink("Incluir ocorrencia", "Create", "Atendimento", new { id = @ViewBag.ClienteId }, new { @class = "btn btn-primary pull-left btn-tst", @style = "" })
 
 
     </div>
@@ -120,37 +121,37 @@
 
     @foreach (var atendimento in Model)
     {
-    <tr>
-        <td><a href="#">Pós venda</a></td>
-        @*<td>@Html.ActionLink(atendimento.Clientes.Nome, "DetailsByIdDetail", new { id = atendimento.Atendimento_id })</td>*@
-        <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</a></td>
-        <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</a></td>
-        <td><a href="#"></a></td>
-        @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>*@
-        <td><a href="#">@string.Format("{0:C}", atendimento.Valor_ofertado)</a></td>
-        @*<td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>*@
-        @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendente_id)</a></td>*@
-        <td><a href="#">HOMOLOGAÇÃO</a></td>
+        <tr>
+            <td><a href="#">Pós venda</a></td>
+            @*<td>@Html.ActionLink(atendimento.Clientes.Nome, "DetailsByIdDetail", new { id = atendimento.Atendimento_id })</td>*@
+            <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</a></td>
+            <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</a></td>
+            <td><a href="#"></a></td>
+            @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>*@
+            <td><a href="#">@string.Format("{0:C}", atendimento.Valor_ofertado)</a></td>
+            @*<td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>*@
+            @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendente_id)</a></td>*@
+            <td><a href="#">HOMOLOGAÇÃO</a></td>
 
-        <td><a href="#" onclick="getTextoComentario(@atendimento.Atendimento_id)">Ler Relato</a></td>
-        <td>
+            <td><a href="#" onclick="getTextoComentario(@atendimento.Atendimento_id)">Ler Relato</a></td>
+            <td>
 
-            @*<td><i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = atendimento.Atendimento_id })</i></td>*@
+                @*<td><i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = atendimento.Atendimento_id })</i></td>*@
 
-    </tr>
+        </tr>
 
     }
 </table>
 <div id="txtAtendimento" style="visibility:hidden;">
     <h4>Atendente: HOMOLOGAÇÃO </h4>
-        <textarea id="areaTxtDocumentos" rows="4" cols="100">
+    <textarea id="areaTxtDocumentos" rows="4" cols="100">
             
         </textarea>
 </div>
 
 <script>
     function getTextoComentario(idAtendimento) {
-       
+
         $(function () {
             $.ajax({
                 dataType: "json",

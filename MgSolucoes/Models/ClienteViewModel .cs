@@ -36,6 +36,7 @@ namespace MgSolucoes.Models
         public DateTime Dt_Nascimento { get; set; }
 
         [Display(Name = "Valor do credito")]
+        
         public decimal Valor_Credito { get; set; }
 
         [Display(Name = "Representacao")]
@@ -56,7 +57,12 @@ namespace MgSolucoes.Models
         [Display(Name = "Nome Vendedor")]
         public String Vendedor { get; set; }
         
+        public int Status_Atendimento { get; set; }
+
+        public int DiasEmAtraso { get; set; }
         public int HasAtendimento { get; set; }
         public int Cancelado { get; set; }
+
+        public List<Cliente> Clientes { get; set; }
     }
 }

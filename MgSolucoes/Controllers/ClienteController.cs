@@ -216,6 +216,38 @@ namespace MgSolucoes.Controllers
             }
 
 
+            if (Status_Atendimento_id != 0 && Status_Atendimento_id != null)
+            {
+                if (hasNome && hasGrupo && hasCota)
+                {
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Representacoes.Representacao_id == Representacao_id && s.Status_Atendimento_Id == Status_Atendimento_id);
+                }
+                else if (hasNome)
+                {
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Cpf == CPF);
+                }
+                else if (hasNome && hasGrupo)
+                {
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome && s.Representacoes.Representacao_id == Representacao_id && s.Status_Atendimento_Id == Status_Atendimento_id);
+                }
+                else if (hasGrupo)
+                {
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Representacoes.Representacao_id == Representacao_id && s.Status_Atendimento_Id == Status_Atendimento_id);
+                }
+                else if (hasCota)
+                {
+                    clientes = clientes.Where(s => s.Representacoes.Representacao_id == Representacao_id && s.Cota_id == cotaNome && s.Status_Atendimento_Id == Status_Atendimento_id);
+                }
+                else if (Representacao_id != null)
+                {
+                    clientes = clientes.Where(s => s.Representacoes.Representacao_id == Representacao_id && s.Status_Atendimento_Id == Status_Atendimento_id);
+                }
+                else
+                {
+                    clientes = clientes.Where(s => s.Cpf == CPF && s.Status_Atendimento_Id == Status_Atendimento_id);
+                }
+            }
+
             //Representacao_id
 
 
@@ -325,6 +357,53 @@ namespace MgSolucoes.Controllers
             return View(clientes.ToPagedList(pageNumber, pageSize));
         }
 
+
+        public ActionResult Pesquisa(ClienteViewModel _clienteVm) {
+
+            {
+                var clientePesquisa = from clienteRc in db.Clientes
+                                      where ((_clienteVm.Nome == null) || clienteRc.Nome == _clienteVm.Nome.Trim())
+                                      && ((_clienteVm.Cpf == null) || clienteRc.Cpf == _clienteVm.Cpf.Trim())
+                                      && ((_clienteVm.Representacao_id == 5) || clienteRc.Representacao_id == _clienteVm.Representacao_id)
+                                      && ((_clienteVm.Grupo_id == 39) || clienteRc.Grupo_id == _clienteVm.Grupo_id)
+                                      && ((_clienteVm.Cota_id == null) || clienteRc.Cota_id == _clienteVm.Cota_id)
+                                      && ((_clienteVm.Status_Atendimento == 0) || clienteRc.Status_Atendimento.Status_Atendimento_id == _clienteVm.Status_Atendimento)
+                                      select new {
+
+                                          Id = clienteRc.ClienteId,
+                                          Nome = clienteRc.Nome,
+                                          Grupo = clienteRc.Grupos.Nome,
+                                          Cota = clienteRc.Cota_id,
+                                          Tel_Movel = clienteRc.Tel_Movel,
+                                          Tel_Fixo = clienteRc.Tel_Fixo,
+                                          RepresentacaoNome = clienteRc.Representacoes.Nome,
+                                          DiasEmAtraso = 0
+                                      };
+
+                List<Cliente> listaClientes = new List<Cliente>();
+
+                foreach (var reg in clientePesquisa)
+                {
+                    Cliente clienteValor = new Cliente();
+                    clienteValor.ClienteId = reg.Id;
+                    clienteValor.Nome = reg.Nome;
+                    clienteValor.Grupos.Nome = reg.Grupo;
+                    clienteValor.Cota_id = reg.Cota;
+                    clienteValor.Tel_Fixo = reg.Tel_Fixo;
+                    clienteValor.Tel_Movel = reg.Tel_Movel;
+                    clienteValor.Representacoes.Nome = reg.RepresentacaoNome;
+                    clienteValor.DiasEmAtraso = reg.DiasEmAtraso;
+                    listaClientes.Add(clienteValor);
+                }
+
+                _clienteVm.Clientes = listaClientes;
+
+                return View(_clienteVm);
+            }
+
+            
+        }
+
         public ActionResult Create() {
             
             
@@ -353,7 +432,7 @@ namespace MgSolucoes.Controllers
                     cliente.Dt_nascimento = model.Dt_Nascimento;
                 }
                 if (model.Valor_Credito == 0) {cliente.Valor_Credito = 0;} else {cliente.Valor_Credito = model.Valor_Credito;}
-                if (model.Email == null) {cliente.Email = "bm@bmc.om.br";} else {cliente.Email = model.Email;}
+                if (model.Email == null) {cliente.Email = "";} else {cliente.Email = model.Email;}
                 if (model.Representacao_id == 0){cliente.Representacao_id = 5;}else{cliente.Representacao_id = model.Representacao_id;}
                 if (model.Grupo_id == 0) { cliente.Grupo_id = 38; } else { cliente.Grupo_id = model.Grupo_id; }
                 if (model.Tel_Fixo == null) { cliente.Tel_Fixo = "(00)0000-0000"; } else { cliente.Tel_Fixo = model.Tel_Fixo; }
@@ -587,30 +666,38 @@ namespace MgSolucoes.Controllers
             
 
             isVencimento = grupo.Dt_Vencimento;
-        
-            for (var i = 0; i < parcelas; i++)
-            {   
+
+            int i = 0;
+            while (parcelas > 0)
+
+            {
                 pagamento.Clienteid = cliente.ClienteId;
 
                 pagamento.Grupo_id = cliente.Grupo_id;
                 pagamento.Representacao_id = cliente.Representacao_id;
 
                 pagamento.Status_Pagamento = "NÃO PAGO";
-               
+                i++;
+
                 if (i >= 0)
                 {
                     var tempDate = isVencimento.Value.AddMonths(i);
-                    var newDate = new DateTime(tempDate.Year, tempDate.Month, tempDate.Day); //create 
+                    DateTime dataAtual = DateTime.Today;
+                    var newDate = new DateTime(dataAtual.Year, tempDate.Month, tempDate.Day); //create 
                     pagamento.Dt_Vencimento = newDate;
                 }
+                pagamento.Valor_Pago = cliente.Valor_Credito*1/100;
+                pagamento.Parcela_num = i;
+                parcelas = parcelas - 1;
                 
-                pagamento.Parcela_num = i + 1;
 
                 db.Pagamentos.Add(pagamento);
-                db.Clientes.SqlQuery("update cliente set pagamentoGerado = 1 where ClienteId = " + clienteId);
                 db.SaveChanges();
-
             }
+
+            cliente.pagamentoGerado = 1;
+            db.SaveChanges();
+            
 
             var resultado = new
             {

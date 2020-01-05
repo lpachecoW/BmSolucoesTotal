@@ -23,8 +23,10 @@ namespace MgSolucoes.Models
         public string Email { get; set; }
         public DateTime Dt_nascimento { get; set; }
         public DateTime Dt_Cadastro { get; set; }
-        [DisplayFormat(DataFormatString = "{0:C0}")]
+
+        
         public decimal Valor_Credito { get; set; }
+
         public string Atendente_id { get; set; }
         public string Vendedor { get; set; }
         public int HasAtendimento { get; set; }

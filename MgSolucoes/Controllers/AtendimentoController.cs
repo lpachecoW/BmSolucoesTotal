@@ -22,6 +22,13 @@ namespace MgSolucoes.Controllers
         {
             //var atendimento = db.Atendimentos.ToList();
             var atendimentos = db.Atendimentos.Where(x=>x.Clienteid == id).ToList();
+            Cliente cliente = db.Clientes.Find(id);
+
+            ViewBag.Representacao = db.Representacoes.Find(cliente.Representacao_id).Nome;
+            ViewBag.ClienteNome = cliente.Nome;
+            ViewBag.Grupo = cliente.Grupos.Nome;
+            ViewBag.Cota = cliente.Cota_id;
+            ViewBag.ClienteId = id;
 
             return View(atendimentos);
 
@@ -109,6 +116,14 @@ namespace MgSolucoes.Controllers
                 atendimento.Texto = model.Texto;
                 atendimento.Status_Lance_id = model.Status_Lance_id;
                 atendimento.Atendente_id = "1";
+                if (model.Status_Atendimento_id == 0)
+                {
+                    cliente.HasAtendimento = 13;
+                }
+                else {
+                    cliente.HasAtendimento = model.Status_Atendimento_id;
+                }
+                
                 cliente.HasAtendimento = model.Status_Atendimento_id;
                 cliente.Status_Atendimento_Id = model.Status_Atendimento_id;
                 atendimento.Valor_ofertado = model.Valor_ofertado;
