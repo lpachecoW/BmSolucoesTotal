@@ -81,20 +81,19 @@ namespace MgSolucoes.Controllers
 
 
         // GET: Pagamento
-        public ActionResult ContasAReceber(int? page)
-        {
+        //public ActionResult ContasAReceber(int? page)
+        //{
 
-            ContasAPagar contas = new ContasAPagar();
+        //    ContasAPagar contas = new ContasAPagar();
 
-            var aReceber = (from cli in db.Clientes
-                            join gru in db.Grupos on cli.Grupo_id equals gru.Grupo_id
-                            join com in db.Comissoes on cli.Grupo_id equals com.Grupo_id
-                            join rep in db.Representacoes on cli.Representacao_id equals rep.Representacao_id
-                            select new ContasAPagarViewModel { Nome = gru.Nome, nome1 = rep.Nome, Nu_parcelas = gru.Nu_parcelas, Valor_Credito = cli.Valor_Credito, ClienteId = cli.ClienteId });
+        //    var aReceber = (from cli in db.Clientes
+        //                    join gru in db.Grupos on cli.Grupo_id equals gru.Grupo_id
+        //                    join rep in db.Representacoes on cli.Representacao_id equals rep.Representacao_id
+        //                    select new ContasAPagarViewModel { Nome = gru.Nome, nome1 = rep.Nome, Nu_parcelas = gru.Nu_parcelas, Valor_Credito = cli.Valor_Credito, ClienteId = cli.ClienteId });
 
 
-            return View(aReceber);
-        }
+        //    return View(aReceber);
+        //}
 
         public ActionResult ContasAReceberPorCliente(int? id)
         {
@@ -115,35 +114,35 @@ namespace MgSolucoes.Controllers
 
 
         // GET: Pagamento
-        public ActionResult ContasAReceberDetalhe(int id)
-        {
+        //public ActionResult ContasAReceberDetalhe(int id)
+        //{
 
-            ContasAPagar contas = new ContasAPagar();
+        //    ContasAPagar contas = new ContasAPagar();
 
-            var aReceber = (from cli in db.Clientes
-                            join gru in db.Grupos on cli.Grupo_id equals gru.Grupo_id
-                            join com in db.Comissoes on cli.Grupo_id equals com.Grupo_id
-                            join rep in db.Representacoes on cli.Representacao_id equals rep.Representacao_id
+        //    var aReceber = (from cli in db.Clientes
+        //                    join gru in db.Grupos on cli.Grupo_id equals gru.Grupo_id
+        //                    join com in db.Comissoes on cli.Grupo_id equals com.Grupo_id
+        //                    join rep in db.Representacoes on cli.Representacao_id equals rep.Representacao_id
 
-                            select new ContasAPagarViewModel
-                            {
-                                Nome = gru.Nome,
-                                nome1 = rep.Nome,
-                                Nu_parcelas = gru.Nu_parcelas,
-                                Valor_Credito = cli.Valor_Credito,
-                                Rep_1 = (cli.Valor_Credito * com.Rep_1 / 100),
-                                Rep_2 = (cli.Valor_Credito * com.Rep_2 / 100),
-                                Rep_3 = (cli.Valor_Credito * com.Rep_3 / 100),
-                                Rep_4 = (cli.Valor_Credito * com.Rep_4 / 100),
-                                Rep_5 = (cli.Valor_Credito * com.Rep_5 / 100),
-                                Rep_6 = (cli.Valor_Credito * com.Rep_6 / 100),
-                                ClienteId = cli.ClienteId
+        //                    select new ContasAPagarViewModel
+        //                    {
+        //                        Nome = gru.Nome,
+        //                        nome1 = rep.Nome,
+        //                        Nu_parcelas = gru.Nu_parcelas,
+        //                        Valor_Credito = cli.Valor_Credito,
+        //                        Rep_1 = (cli.Valor_Credito * com.Rep_1 / 100),
+        //                        Rep_2 = (cli.Valor_Credito * com.Rep_2 / 100),
+        //                        Rep_3 = (cli.Valor_Credito * com.Rep_3 / 100),
+        //                        Rep_4 = (cli.Valor_Credito * com.Rep_4 / 100),
+        //                        Rep_5 = (cli.Valor_Credito * com.Rep_5 / 100),
+        //                        Rep_6 = (cli.Valor_Credito * com.Rep_6 / 100),
+        //                        ClienteId = cli.ClienteId
 
-                            });
+        //                    });
 
-            aReceber = aReceber.Where(x => x.ClienteId.Equals(id));
-            return View(aReceber);
-        }
+        //    aReceber = aReceber.Where(x => x.ClienteId.Equals(id));
+        //    return View(aReceber);
+        //}
 
 
         public ActionResult Create(int id)

@@ -206,7 +206,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AtendimentoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\ComissaoController.cs" />
     <Compile Include="Controllers\ContratoController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\GruposController.cs" />
@@ -689,6 +688,7 @@
     <Content Include="Views\Shared\_MenuLogado.cshtml" />
     <Content Include="Views\Shared\_MenuDeslogado.cshtml" />
     <Content Include="Views\Cliente\Pesquisa.cshtml" />
+    <Content Include="Views\Atendimento\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

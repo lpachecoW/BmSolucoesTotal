@@ -656,49 +656,50 @@ namespace MgSolucoes.Controllers
             Cliente cliente = db.Clientes.Find(clienteId);
             Grupos grupo = db.Grupos.Find(cliente.Grupo_id);
 
-
-            
-            int parcelas = cliente.Grupos.Nu_parcelas;
-            var pagamento = new Pagamento();
-            var olddate = DateTime.Now;
-
-            DateTime? isVencimento = null;
-            
-
-            isVencimento = grupo.Dt_Vencimento;
-
-            int i = 0;
-            while (parcelas > 0)
-
+            if (cliente.pagamentoGerado == 0)
             {
-                pagamento.Clienteid = cliente.ClienteId;
 
-                pagamento.Grupo_id = cliente.Grupo_id;
-                pagamento.Representacao_id = cliente.Representacao_id;
+                int parcelas = cliente.Grupos.Nu_parcelas;
+                var pagamento = new Pagamento();
+                var olddate = DateTime.Now;
 
-                pagamento.Status_Pagamento = "NÃO PAGO";
-                i++;
+                DateTime? isVencimento = null;
 
-                if (i >= 0)
+
+                isVencimento = grupo.Dt_Vencimento;
+
+                int i = 0;
+                while (parcelas > 0)
+
                 {
-                    var tempDate = isVencimento.Value.AddMonths(i);
-                    DateTime dataAtual = DateTime.Today;
-                    var newDate = new DateTime(dataAtual.Year, tempDate.Month, tempDate.Day); //create 
-                    pagamento.Dt_Vencimento = newDate;
+                    pagamento.Clienteid = cliente.ClienteId;
+
+                    pagamento.Grupo_id = cliente.Grupo_id;
+                    pagamento.Representacao_id = cliente.Representacao_id;
+
+                    pagamento.Status_Pagamento = "NÃO PAGO";
+                    i++;
+
+                    if (i >= 0)
+                    {
+                        var tempDate = isVencimento.Value.AddMonths(i);
+                        DateTime dataAtual = DateTime.Today;
+                        var newDate = new DateTime(dataAtual.Year, tempDate.Month, tempDate.Day); //create 
+                        pagamento.Dt_Vencimento = newDate;
+                    }
+                    pagamento.Valor_Pago = cliente.Valor_Credito * 1 / 100;
+                    pagamento.Parcela_num = i;
+                    parcelas = parcelas - 1;
+
+
+                    db.Pagamentos.Add(pagamento);
+                    db.SaveChanges();
                 }
-                pagamento.Valor_Pago = cliente.Valor_Credito*1/100;
-                pagamento.Parcela_num = i;
-                parcelas = parcelas - 1;
-                
 
-                db.Pagamentos.Add(pagamento);
+                cliente.pagamentoGerado = 1;
                 db.SaveChanges();
+
             }
-
-            cliente.pagamentoGerado = 1;
-            db.SaveChanges();
-            
-
             var resultado = new
             {
                 Sucess = true

@@ -33,7 +33,62 @@ namespace MgSolucoes.Controllers
             return View(atendimentos);
 
         }
-        
+
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Atendimento atendimento = db.Atendimentos.Find(id);
+            
+            if (atendimento == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(atendimento);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(AtendimentoViewModel model, int id)
+        {
+
+            var atendimento = db.Atendimentos.Find(model.Atendimento_id);
+            if (atendimento == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            atendimento.Texto = atendimento.Texto;
+            atendimento.Dt_Atendimento = atendimento.Dt_Atendimento;
+            atendimento.Alteracao = DateTime.UtcNow;
+            atendimento.Clienteid = atendimento.Clienteid;
+            atendimento.Status_Atendimento_id = atendimento.Status_Atendimento_id;
+            atendimento.Valor_ofertado = atendimento.Valor_ofertado;
+            atendimento.Procon = atendimento.Procon;
+            atendimento.Boleto_Enviado = atendimento.Boleto_Enviado;
+
+
+            db.SaveChanges();
+
+            atendimento.Texto = model.Texto;
+            atendimento.Dt_Atendimento = model.Dt_Atendimento;
+            atendimento.Clienteid = model.Clienteid;
+            atendimento.Status_Atendimento_id = model.Status_Atendimento_id;
+            atendimento.Valor_ofertado = model.Valor_ofertado;
+            atendimento.Procon = model.Procon;
+            atendimento.Boleto_Enviado = model.Boleto_Enviado;
+
+
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
         //Action para o botao de retorno
         public ActionResult Inicio()
         {
@@ -118,14 +173,13 @@ namespace MgSolucoes.Controllers
                 atendimento.Atendente_id = "1";
                 if (model.Status_Atendimento_id == 0)
                 {
-                    cliente.HasAtendimento = 13;
+                    cliente.HasAtendimento = 0;
                 }
                 else {
-                    cliente.HasAtendimento = model.Status_Atendimento_id;
+                    cliente.HasAtendimento = 1;
+                    cliente.Status_Atendimento_Id = model.Status_Atendimento_id;
                 }
                 
-                cliente.HasAtendimento = model.Status_Atendimento_id;
-                cliente.Status_Atendimento_Id = model.Status_Atendimento_id;
                 atendimento.Valor_ofertado = model.Valor_ofertado;
                 atendimento.Procon = model.Procon;
                 atendimento.Contatado = model.Contatado;

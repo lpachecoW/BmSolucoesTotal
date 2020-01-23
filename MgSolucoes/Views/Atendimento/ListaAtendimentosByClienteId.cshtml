@@ -121,19 +121,14 @@
 
     @foreach (var atendimento in Model)
     {
-        <tr>
+        <tr onclick="getTextoComentario(@atendimento.Atendimento_id)">
             <td><a href="#">Pós venda</a></td>
-            @*<td>@Html.ActionLink(atendimento.Clientes.Nome, "DetailsByIdDetail", new { id = atendimento.Atendimento_id })</td>*@
             <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendimentos.Nome)</a></td>
             <td><a href="#">@Html.DisplayFor(modelItem => atendimento.Dt_Atendimento)</a></td>
             <td><a href="#"></a></td>
-            @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Lances.Nome)</a></td>*@
             <td><a href="#">@string.Format("{0:C}", atendimento.Valor_ofertado)</a></td>
-            @*<td>@Html.DisplayFor(modelItem => atendimento.Pagamentos.Nome)</td>*@
-            @*<td><a href="#">@Html.DisplayFor(modelItem => atendimento.Atendente_id)</a></td>*@
             <td><a href="#">HOMOLOGAÇÃO</a></td>
-
-            <td><a href="#" onclick="getTextoComentario(@atendimento.Atendimento_id)">Ler Relato</a></td>
+            <td><a href="#" >Ler Relato</a></td>
             <td>
 
                 @*<td><i class="material-icons md-36">@Html.ActionLink("delete", "Delete", new { id = atendimento.Atendimento_id })</i></td>*@
