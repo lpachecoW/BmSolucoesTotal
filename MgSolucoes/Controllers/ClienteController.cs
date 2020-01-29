@@ -451,7 +451,7 @@ namespace MgSolucoes.Controllers
                 {   
                     db.Clientes.Add(cliente);
                     db.SaveChanges();
-                    AddPagamentosPorContrato(cliente.Nome, cliente.Nu_conta_ade);
+                    //AddPagamentosPorContrato(cliente.Nome, cliente.Nu_conta_ade);
                     return RedirectToAction("Index");
                 }
                 catch (DbEntityValidationException e)
