@@ -170,7 +170,7 @@ namespace MgSolucoes.Controllers
                 atendimento.Dt_Atendimento = DateTime.Now;
                 atendimento.Texto = model.Texto;
                 atendimento.Status_Lance_id = model.Status_Lance_id;
-                atendimento.Atendente_id = "1";
+                atendimento.Atendente_id = 1;
                 if (model.Status_Atendimento_id == 0)
                 {
                     cliente.HasAtendimento = 0;

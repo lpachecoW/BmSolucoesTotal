@@ -21,7 +21,7 @@ namespace MgSolucoes.Models
         public DateTime Dt_Atendimento { get; set; }
         [Required(AllowEmptyStrings = true)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string Atendente_id { get; set; }
+        public int Atendente_id { get; set; }
         public decimal Valor_ofertado { get; set; }
 
         public int? Contatado { get; set; }
