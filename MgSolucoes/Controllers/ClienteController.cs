@@ -71,7 +71,7 @@ namespace MgSolucoes.Controllers
             var pagamentos = dbPag.Pagamentos.ToList();
 
             if (!String.IsNullOrEmpty(clienteNome)) {
-                clientes = clientes.Where(s => s.Nome == clienteNome);
+                clientes = clientes.Where(s => s.Nome.Contains(clienteNome.ToUpper()));
                 hasNome = true;
             }
 

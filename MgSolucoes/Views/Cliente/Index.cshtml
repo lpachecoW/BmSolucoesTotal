@@ -19,12 +19,11 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Represetancoes</label>
-                @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"), new { @class = "form-control" })
-
+                @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"),"REPRESENTACAO", new { @class = "form-control" })
             </div>
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Grupo</label>
-                @Html.DropDownList("Grupo_id", new SelectList(ViewBag.ddlGrupo, "Grupo_id", "Nome"), new { @class = "form-control" })
+                @Html.DropDownList("Grupo_id", new SelectList(ViewBag.ddlGrupo, "Grupo_id", "Nome"), "GRUPO", new { @class = "form-control" })
             </div>
             <div class="form-group col-md-3">
                 <label for="inputEmail4">Cota</label>
@@ -120,7 +119,7 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <a class="dropdown-item" href="@Url.Action("Create", "Atendimento", new { id = cliente.ClienteId })">Ocorrencia</a>
-                                                @if (cliente.pagamentoGerado == 1)
+                                                @if (cliente.pagamentoGerado == 0)
                                                 {
                                                 <a class="dropdown-item" href="@Url.Action("ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId })">Historico de Pagamento</a>
                                                 }
