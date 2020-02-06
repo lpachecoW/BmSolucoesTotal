@@ -24,7 +24,7 @@ namespace MgSolucoes.Controllers
         }
 
         // GET: Cliente
-        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, string CPF,string statusCli, int? Representacao_id, int? Status_Atendimento_id, int? page)
+        public ActionResult Index(string sortOrder, string currentFilter, string clienteNome, string grupoNome, string cotaNome,string representacaoNome, string comAtendimento, string CPF,string statusCli, int? Grupo_id, int? Representacao_id, int? Status_Atendimento_id, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NomeSortParm = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
@@ -35,9 +35,7 @@ namespace MgSolucoes.Controllers
             ViewBag.ddlRepresentacao = db.Representacoes;
             ViewBag.ddlStatusAtendimento = db.Status_Atendimentos;
 
-            if (grupoNome == "39") {
-                grupoNome = null;
-            }
+         
 
             if (Representacao_id == 5) {
                 Representacao_id = 0;
@@ -76,15 +74,15 @@ namespace MgSolucoes.Controllers
             }
 
 
-            if (!String.IsNullOrEmpty(grupoNome))
+            if (Grupo_id != null)
             {
                 if (hasNome)
                 {
-                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome);
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupo_id == Grupo_id);
                     hasGrupo = true;
                 }
                 else {
-                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome);
+                    clientes = clientes.Where(s => s.Grupo_id == Grupo_id);
                 }
             }
 
@@ -93,18 +91,18 @@ namespace MgSolucoes.Controllers
                 hasCota = true;
                 if (hasNome && hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome);
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Grupos.Nome == grupoNome && s.Cota_id.Equals(cotaNome));
                 }
                 else if (hasNome)
                 {
-                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Cota_id == cotaNome);
+                    clientes = clientes.Where(s => s.Nome == clienteNome && s.Cota_id.Equals(cotaNome));
                 }
                 else if (hasGrupo)
                 {
-                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Cota_id == cotaNome);
+                    clientes = clientes.Where(s => s.Grupos.Nome == grupoNome && s.Cota_id.Equals(cotaNome));
                 }
                 else {
-                    clientes = clientes.Where(s => s.Cota_id ==cotaNome);
+                    clientes = clientes.Where(s => s.Cota_id.Equals(cotaNome));
                 }
                 
             }
