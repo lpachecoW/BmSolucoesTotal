@@ -19,7 +19,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Represetancoes</label>
-                @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"),"REPRESENTACAO", new { @class = "form-control" })
+                @Html.DropDownList("Representacao_id", new SelectList(ViewBag.ddlRepresentacao, "Representacao_id", "Nome"), "REPRESENTACAO", new { @class = "form-control" })
             </div>
             <div class="form-group col-md-2">
                 <label for="inputEmail4">Grupo</label>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputEmail4">CPF</label>
-                <input type="text" class="form-control" id="myInput" name="CPF" placeholder="CPF cliente">
+                <input type="text" class="form-control" id="CPF" name="CPF" placeholder="CPF cliente">
             </div>
             <div class="form-group col-md-3">
                 <label for="Status_Atendimento_id">Status</label>
@@ -76,7 +76,7 @@
 <div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -97,9 +97,9 @@
                         {
                             <tr>
                                 <td>
-                                        <i class="material-icons md-36" style="color:@cliente.CorStatusPagamento">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:" + cliente.CorStatusPagamento + "" })</i>
-                                    </td>
-                                
+                                    <i class="material-icons md-36" style="color:@cliente.CorStatusPagamento">@Html.ActionLink("contact_phone", "Create", "Atendimento", new { id = cliente.ClienteId }, new { @style = "color:" + cliente.CorStatusPagamento + "" })</i>
+                                </td>
+
                                 <td>@Html.ActionLink(cliente.Nome, "Details", new { id = cliente.ClienteId })</td>
                                 <td>@Html.DisplayFor(modelItem => cliente.Grupos.Nome)/@Html.Raw(cliente.Cota_id)</td>
                                 <td id="Tel_Fixo">
@@ -121,11 +121,11 @@
                                                 <a class="dropdown-item" href="@Url.Action("Create", "Atendimento", new { id = cliente.ClienteId })">Ocorrencia</a>
                                                 @if (cliente.pagamentoGerado == 0)
                                                 {
-                                                <a class="dropdown-item" href="@Url.Action("ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId })">Historico de Pagamento</a>
+                                                    <a class="dropdown-item" href="@Url.Action("ContasAReceberPorCliente", "Pagamento", new { id = cliente.ClienteId })">Historico de Pagamento</a>
                                                 }
                                                 <a class="dropdown-item" href="@Url.Action("ListaAtendimentosByClienteId", "Atendimento", new { id = cliente.ClienteId })">Historico de atendimento</a>
                                                 <a class="dropdown-item" href="@Url.Action("Edit", "Cliente", new { id = cliente.ClienteId })">Editar Registro</a>
-     
+
                                             </div>
                                         </div>
                                     </div>
@@ -149,3 +149,29 @@
 
 </tfoot>
 
+
+
+<script>
+    $(document).ready(function () {
+
+
+
+     
+
+        $("#CPF").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+        //$("#Valor_Credito").inputmask('currency', {
+        //    autoUnmask: true,
+        //    radixPoint: ",",
+        //    groupSeparator: ".",
+        //    allowMinus: false,
+        //    //prefix: 'R$ ',
+        //    digits: 2,
+        //    digitsOptional: false,
+        //    rightAlign: false,
+        //    unmaskAsNumber: true
+        //});
+
+
+    });
+
+</script>

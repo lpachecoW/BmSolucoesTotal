@@ -49,8 +49,8 @@ namespace MgSolucoes.Controllers
             var hasNome = false;
             var hasGrupo = false;
             var hasCota = false;
-            
 
+           
             if (clienteNome != null)
             {
                 page = 1;
@@ -171,13 +171,13 @@ namespace MgSolucoes.Controllers
                 {
                     clientes = clientes.Where(s => s.Cpf == CPF && s.Cota_id == cotaNome);
                 }
-                else if (Representacao_id != 0)
+                else if (Representacao_id != null)
                 {
                     clientes = clientes.Where(s => s.Cpf == CPF && s.Representacoes.Representacao_id == Representacao_id);
                 }
                 else
                 {
-                    clientes = clientes.Where(s => s.Cpf == CPF);
+                    clientes = clientes.Where(s => s.Cpf.Equals(CPF));
                 }
 
             }
@@ -757,5 +757,9 @@ namespace MgSolucoes.Controllers
         }
 
 
+        public string teste(string cpf)
+        {
+            return Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
+        }
     }
 }

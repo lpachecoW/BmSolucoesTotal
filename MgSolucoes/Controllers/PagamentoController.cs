@@ -317,13 +317,16 @@ namespace MgSolucoes.Controllers
         {
 
             var pagamento = db.Pagamentos.Find(model.PagamentoId);
+            //var cliente = db.Clientes.Find(model.Clienteid);
+
             if (pagamento == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else {
+                
                 pagamento.Dt_Pagamento = model.Dt_Pagamento;
-                pagamento.Dt_Vencimento = model.Dt_Vencimento;
+                //pagamento.Dt_Vencimento = model.Dt_Vencimento;
                 pagamento.Valor_Pago = model.Valor_Pago;
                 pagamento.Status_Pagamento = model.Status_Pagamento;
                 pagamento.Parcela_num = model.Parcela_num;
