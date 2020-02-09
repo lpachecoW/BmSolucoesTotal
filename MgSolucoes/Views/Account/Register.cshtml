@@ -31,6 +31,15 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
+
+    <!--Selecione o Tipo de Perfil para o usuário-->
+  <div class="form-group">
+    @Html.Label("Selecione o Tipo de Perfil do Usuário", new { @class = "col-md-2 control-label" })
+     <div class="col-md-10">
+        @Html.DropDownList("Name")
+     </div>
+  </div>
+  <!--termina aqui-->
  
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

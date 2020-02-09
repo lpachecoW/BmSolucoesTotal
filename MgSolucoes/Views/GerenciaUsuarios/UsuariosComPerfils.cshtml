@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<MgSolucoes.Models.UsersInRoleViewModel>
+@{
+    ViewBag.Title = "Usuários Com Perfis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="box-title">
+            <b>Usuários e Perfis</b>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="panel-body">
+        <table class="table table-hover table-bordered table-condensed" id="tabela1">
+            <thead>
+                <tr>
+                    <td><b>Usuário</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Perfis</b></td>
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+        <p class="box-title">
+            <b>
+                Total de usuários : @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  :
+            </b><span class="label label-primary">@Model.Count()</span>
+        </p>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $("#tabela1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+    </script>
+}

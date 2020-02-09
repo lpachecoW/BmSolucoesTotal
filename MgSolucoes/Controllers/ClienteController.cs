@@ -521,6 +521,7 @@ namespace MgSolucoes.Controllers
             {
                 return HttpNotFound();
             }
+            cliente.Cancelado = 1;
 
             return View(cliente);
         }
